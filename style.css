@@ -509,35 +509,44 @@ button { font: inherit; color: inherit; }
 
 /* Наведение на тариф. Только там, где курсор действительно есть:
    на тач-экранах :hover залипает после тапа до следующего касания. */
-@media (hover: hover) {
-  .plan {
+/* any-hover, а не hover: на ноутбуках с сенсорным экраном основной
+   указатель может отдаваться как «без наведения», и при (hover: hover)
+   весь блок выключался вместе с подсветкой тарифов. any-hover срабатывает,
+   если наводить умеет хотя бы одно устройство ввода, то есть мышь. */
+@media (any-hover: hover) {
+  /* Селекторы намеренно начинаются с .plans: ниже по файлу лежит
+     .reveal.in { transform: none } — та же специфичность (два класса
+     против класса с псевдоклассом), и при равенстве побеждает правило,
+     объявленное позже. Из-за этого карточка по наведению не росла:
+     transform затирался обратно в none. Лишний .plans поднимает вес. */
+  .plans .plan {
     transition: transform 260ms var(--ease), border-color 260ms var(--ease),
       box-shadow 260ms var(--ease);
   }
 
   /* карточка под курсором становится такой же, как средний тариф:
      подрастает и заливается зелёным */
-  .plan:hover {
+  .plans .plan:hover {
     transform: translateY(-8px) scale(1.02);
     border-color: rgba(111, 206, 111, 0.85);
     box-shadow: 0 24px 50px -22px rgba(82, 170, 82, 0.45);
     z-index: 2;
   }
 
-  .plan:hover::before { opacity: 1; }
+  .plans .plan:hover::before { opacity: 1; }
 
   /* текст на зелёном должен читаться так же, как в средней карточке */
-  .plan:hover .plan-sub,
-  .plan:hover .plan-price .per,
-  .plan:hover .plan-lead { color: rgba(255, 255, 255, 0.75); }
+  .plans .plan:hover .plan-sub,
+  .plans .plan:hover .plan-price .per,
+  .plans .plan:hover .plan-lead { color: rgba(255, 255, 255, 0.75); }
 
-  .plan:hover .plan-list li { color: rgba(255, 255, 255, 0.9); }
-  .plan:hover .plan-list .icon { color: var(--accent-hi); }
-  .plan:hover .plan-price { border-top-color: rgba(255, 255, 255, 0.18); }
+  .plans .plan:hover .plan-list li { color: rgba(255, 255, 255, 0.9); }
+  .plans .plan:hover .plan-list .icon { color: var(--accent-hi); }
+  .plans .plan:hover .plan-price { border-top-color: rgba(255, 255, 255, 0.18); }
 
   /* кнопка становится белой, как в среднем тарифе */
-  .plan:hover .btn-ghost { background: #fff; border-color: #fff; color: #101210; }
-  .plan:hover .btn-ghost .arr { background: var(--accent); color: var(--accent-ink); }
+  .plans .plan:hover .btn-ghost { background: #fff; border-color: #fff; color: #101210; }
+  .plans .plan:hover .btn-ghost .arr { background: var(--accent); color: var(--accent-ink); }
 }
 
 .plans-note { margin-top: 26px; text-align: center; font-size: 14px; color: var(--mute); }
