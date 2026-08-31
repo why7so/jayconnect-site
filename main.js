@@ -1,6 +1,6 @@
 /* Jay Connect — поведение лендинга.
    Ванильный JS без сборки: сайт статический и деплоится как есть.
-   Движения минимум, и оно целиком выключается при prefers-reduced-motion. */
+   Движение целиком выключается при prefers-reduced-motion. */
 
 (function () {
   "use strict";
@@ -8,7 +8,7 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasIO = "IntersectionObserver" in window;
 
-  /* ---------- шапка: линия и фон появляются после скролла ---------- */
+  /* ---------- шапка: фон и линия появляются после скролла ---------- */
 
   var nav = document.getElementById("nav");
   var burger = document.getElementById("burger");
@@ -35,8 +35,7 @@
 
   /* ---------- появление блоков ----------
      Один наблюдатель на все .reveal: элемент показывается один раз и сразу
-     отписывается, чтобы не считать пересечения до конца жизни страницы.
-     Каскад внутри секции задаётся в разметке через --d. */
+     отписывается. Каскад внутри секции задаётся в разметке через --d. */
 
   var revealables = document.querySelectorAll(".reveal");
 
@@ -55,8 +54,8 @@
   }
 
   /* ---------- кольцо подписки в макете приложения ----------
-     Заполняется, только когда макет реально попал на экран: иначе анимация
-     проходит впустую у тех, кто открыл страницу уже прокрученной. */
+     Заполняется, только когда макет попал на экран: иначе анимация пройдёт
+     впустую у тех, кто открыл страницу уже прокрученной. */
 
   var phone = document.getElementById("phone");
 
@@ -72,15 +71,14 @@
   }
 
   /* ---------- липкая кнопка на телефонах ----------
-     Появляется, когда кнопка первого экрана уже уехала вверх: дублировать
-     её, пока она видна, смысла нет. */
+     Появляется, когда кнопка первого экрана уехала вверх: дублировать её,
+     пока она на виду, незачем. */
 
   var bar = document.getElementById("mobile-bar");
   var heroActions = document.querySelector(".hero-actions");
 
   function onBar() {
-    var gone = heroActions.getBoundingClientRect().bottom < 0;
-    bar.classList.toggle("show", gone);
+    bar.classList.toggle("show", heroActions.getBoundingClientRect().bottom < 0);
   }
   onBar();
   window.addEventListener("scroll", onBar, { passive: true });

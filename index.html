@@ -5,18 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Jay Connect — VPN с управлением в Telegram</title>
 <meta name="description" content="Jay Connect — VPN без ограничений трафика и скорости. Подписка, оплата и подключение в Telegram. Первые 3 дня бесплатно, дальше от 199 ₽ в месяц, 3 устройства в подписке." />
-<meta name="theme-color" content="#0b0c0b" />
+<meta name="theme-color" content="#0a0b0a" />
 <link rel="canonical" href="https://jayconnect.net/" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="favicon.svg" />
+<link rel="apple-touch-icon" href="assets/jay.png" />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jayconnect.net/" />
 <meta property="og:site_name" content="Jay Connect" />
 <meta property="og:title" content="Jay Connect — VPN с управлением в Telegram" />
 <meta property="og:description" content="Без ограничений трафика и скорости. Подписка, оплата и подключение в Telegram. Первые 3 дня бесплатно." />
+<meta property="og:image" content="https://jayconnect.net/assets/jay.png" />
 <meta property="og:locale" content="ru_RU" />
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -30,30 +34,48 @@
     <path pathLength="1" d="M273.0 334.1Q273.0 334.1 198.0 334.2Q123.0 334.3 118.0 333.2Q113.0 332.1 108.4 329.1Q103.9 326.0 100.9 322.5Q97.9 319.0 96.1 314.5Q94.4 310.0 168.7 309.9Q243.0 309.7 244.0 310.2Q245.0 310.7 249.0 310.7Q253.0 310.7 257.0 312.3Q261.0 313.9 264.0 316.4Q267.0 318.9 269.6 322.9Q272.1 327.0 272.6 330.5Q273.0 334.1 273.0 334.1Z" />
     <path pathLength="1" d="M195.0 384.1Q195.0 384.1 174.0 384.2Q153.0 384.3 150.0 383.7Q147.0 383.1 142.5 380.6Q138.0 378.1 134.5 374.6Q131.0 371.1 128.9 368.1Q126.9 365.0 126.4 362.5Q125.9 360.0 129.0 359.4Q132.0 358.7 154.5 358.7Q177.0 358.7 185.0 359.8Q193.0 360.9 195.6 362.9Q198.1 365.0 199.7 368.5Q201.3 372.0 201.2 376.5Q201.1 381.0 200.1 382.1Q199.0 383.1 197.0 383.6Q195.0 384.1 195.0 384.1Z" />
   </symbol>
+
+  <!-- косые штрихи в углу карточек -->
+  <symbol id="glyph" viewBox="0 0 156 100">
+    <g fill="currentColor">
+      <path d="M60 0h26L46 100H20z" />
+      <path d="M104 0h26L90 100H64z" />
+      <path d="M148 0h26l-40 100h-26z" />
+    </g>
+  </symbol>
 </svg>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top">
-      <svg class="brand-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
-      <span>Jay Connect</span>
+    <a class="logo" href="#top" aria-label="Jay Connect — на главную">
+      <svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
+      <span class="logo-word">Jay <span>Connect</span></span>
     </a>
+
     <nav class="nav-links">
       <a href="#features">Возможности</a>
-      <a href="#how">Подключение</a>
+      <a href="#connect">Подключение</a>
       <a href="#pricing">Тарифы</a>
-      <a href="#apps">Устройства</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn btn-ghost btn-sm nav-cta" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Открыть бота</a>
+
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="https://t.me/jayconnect_support" target="_blank" rel="noopener">Поддержка</a>
+      <a class="btn btn-light btn-sm" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+        Открыть бота
+        <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+
     <button class="nav-burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span></button>
   </div>
+
   <div class="mobile-menu" id="mobile-menu">
     <a href="#features">Возможности</a>
-    <a href="#how">Подключение</a>
+    <a href="#connect">Подключение</a>
     <a href="#pricing">Тарифы</a>
-    <a href="#apps">Устройства</a>
     <a href="#faq">Вопросы</a>
+    <a href="https://t.me/jayconnect_support" target="_blank" rel="noopener">Поддержка</a>
     <a href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Открыть бота</a>
   </div>
 </header>
@@ -62,44 +84,104 @@
 
   <!-- ================= первый экран ================= -->
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <svg class="hero-logo" viewBox="0 0 512 512" aria-hidden="true">
+    <div class="wrap hero-inner">
+      <svg class="logo-mark big draw" viewBox="0 0 512 512" aria-hidden="true">
     <path pathLength="1" d="M222.0 430.1Q222.0 430.1 207.5 430.1Q193.0 430.1 191.9 428.6Q190.7 427.0 190.7 419.5Q190.7 412.0 191.3 410.5Q191.9 409.0 194.5 408.4Q197.0 407.7 213.0 407.2Q229.0 406.7 237.0 405.2Q245.0 403.7 253.5 400.2Q262.0 396.7 272.0 390.2Q282.0 383.8 292.3 373.4Q302.7 363.0 308.2 355.0Q313.7 347.0 317.2 340.0Q320.7 333.0 323.2 325.5Q325.7 318.0 328.8 300.5Q331.9 283.0 335.4 275.0Q338.9 267.0 341.9 263.0Q344.8 259.0 359.4 245.4Q374.0 231.8 375.3 229.9Q376.7 228.0 377.2 226.0Q377.7 224.0 374.4 216.6Q371.0 209.2 367.0 205.3Q363.0 201.3 358.5 198.8Q354.0 196.3 349.5 194.8Q345.0 193.3 322.0 192.3Q299.0 191.3 288.0 189.2Q277.0 187.1 271.0 185.1Q265.0 183.1 258.0 179.6Q251.0 176.1 243.9 171.1Q236.9 166.0 230.4 159.5Q223.9 153.0 219.9 147.5Q215.9 142.0 213.9 138.0Q211.9 134.0 211.9 133.5Q212.0 132.9 213.0 132.9Q214.0 132.9 217.5 134.8Q221.0 136.7 228.0 139.2Q235.0 141.7 238.5 142.7Q242.0 143.7 243.3 143.3Q244.6 143.0 244.6 142.5Q244.6 142.0 237.8 135.5Q230.9 129.0 226.4 121.5Q221.9 114.0 218.9 103.5Q215.9 93.0 215.9 87.2Q216.0 81.4 224.0 88.0Q232.0 94.7 243.5 102.2Q255.0 109.7 279.5 122.2Q304.0 134.7 323.5 143.8Q343.0 152.9 348.5 156.4Q354.0 159.9 362.0 167.4Q370.0 174.9 373.6 179.9Q377.1 185.0 379.1 189.0Q381.1 193.0 383.1 199.0Q385.1 205.0 385.7 209.5Q386.3 214.0 387.2 215.9Q388.0 217.8 406.0 226.4Q424.0 234.9 426.8 236.9Q429.6 239.0 414.8 241.2Q400.0 243.3 393.5 244.8Q387.0 246.3 383.0 248.3Q379.0 250.3 373.0 255.3Q367.0 260.2 363.7 264.6Q360.3 269.0 356.8 276.5Q353.3 284.0 350.7 300.0Q348.1 316.0 344.1 329.0Q340.1 342.0 336.1 350.0Q332.1 358.0 327.6 365.0Q323.1 372.0 318.6 377.6Q314.0 383.1 306.6 390.6Q299.1 398.0 292.1 403.6Q285.0 409.1 273.5 415.1Q262.0 421.1 252.5 424.1Q243.0 427.1 232.5 428.6Q222.0 430.1 222.0 430.1Z" />
     <path pathLength="1" d="M304.0 296.1Q304.0 296.1 299.5 295.6Q295.0 295.1 284.5 292.2Q274.0 289.3 264.5 287.8Q255.0 286.3 246.5 286.3Q238.0 286.3 236.5 285.8Q235.0 285.3 184.0 285.3Q133.0 285.3 131.5 284.8Q130.0 284.3 117.0 284.2Q104.0 284.1 100.0 282.6Q96.0 281.1 91.4 277.1Q86.8 273.0 84.4 269.5Q81.9 266.0 81.4 263.5Q80.9 261.0 156.0 260.8Q231.0 260.7 233.3 258.3Q235.7 256.0 239.7 250.0Q243.7 244.0 248.7 233.0Q253.7 222.0 256.7 211.5Q259.7 201.0 259.8 199.0Q259.9 197.0 260.4 196.0Q261.0 194.9 262.5 194.9Q264.0 194.9 268.5 197.4Q273.0 199.9 278.5 205.4Q284.0 210.9 289.1 217.9Q294.1 225.0 298.6 234.0Q303.1 243.0 305.1 249.5Q307.1 256.0 308.2 262.0Q309.3 268.0 309.2 278.0Q309.1 288.0 307.6 291.5Q306.1 295.0 305.0 295.6Q304.0 296.1 304.0 296.1Z" />
     <path pathLength="1" d="M341.0 231.1Q341.0 231.1 337.5 231.1Q334.0 231.1 331.4 228.6Q328.9 226.0 328.8 223.5Q328.7 221.0 329.3 219.5Q329.9 218.0 332.9 215.9Q336.0 213.9 338.0 213.9Q340.0 213.9 342.0 214.9Q344.0 215.9 345.6 218.4Q347.1 221.0 346.6 224.0Q346.1 227.0 343.6 229.1Q341.0 231.1 341.0 231.1Z" />
     <path pathLength="1" d="M273.0 334.1Q273.0 334.1 198.0 334.2Q123.0 334.3 118.0 333.2Q113.0 332.1 108.4 329.1Q103.9 326.0 100.9 322.5Q97.9 319.0 96.1 314.5Q94.4 310.0 168.7 309.9Q243.0 309.7 244.0 310.2Q245.0 310.7 249.0 310.7Q253.0 310.7 257.0 312.3Q261.0 313.9 264.0 316.4Q267.0 318.9 269.6 322.9Q272.1 327.0 272.6 330.5Q273.0 334.1 273.0 334.1Z" />
     <path pathLength="1" d="M195.0 384.1Q195.0 384.1 174.0 384.2Q153.0 384.3 150.0 383.7Q147.0 383.1 142.5 380.6Q138.0 378.1 134.5 374.6Q131.0 371.1 128.9 368.1Q126.9 365.0 126.4 362.5Q125.9 360.0 129.0 359.4Q132.0 358.7 154.5 358.7Q177.0 358.7 185.0 359.8Q193.0 360.9 195.6 362.9Q198.1 365.0 199.7 368.5Q201.3 372.0 201.2 376.5Q201.1 381.0 200.1 382.1Q199.0 383.1 197.0 383.6Q195.0 384.1 195.0 384.1Z" />
-        </svg>
+      </svg>
 
-        <h1>VPN, которым управляют из Telegram</h1>
+      <h1>Простые тарифы.<br />Быстрый интернет.</h1>
 
-        <p class="hero-lead">
-          Подписка, оплата, устройства и ключ доступа живут в одном боте. Ставите
-          приложение, один раз добавляете ссылку и включаете VPN кнопкой. Ни конфигов,
-          ни личных кабинетов с паролями.
-        </p>
+      <p class="hero-lead">
+        Платите за срок, а не за функции. Скорость, локации и протоколы одинаковые
+        на всех тарифах. Подписка, оплата и подключение живут в одном Telegram-боте.
+      </p>
 
-        <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Попробовать бесплатно</a>
-          <a class="btn btn-ghost btn-lg" href="#pricing">Тарифы</a>
-        </div>
-
-        <p class="hero-note">Первые 3 дня выдаются автоматически, карта для этого не нужна.</p>
-
-        <div class="hero-facts">
-          <div><div class="val">199 ₽</div><div class="lbl">в месяц</div></div>
-          <div><div class="val">3</div><div class="lbl">устройства в подписке</div></div>
-          <div><div class="val">Без лимитов</div><div class="lbl">трафик и скорость</div></div>
-          <div><div class="val">3 дня</div><div class="lbl">бесплатно на старте</div></div>
-        </div>
+      <div class="hero-actions">
+        <a class="btn btn-light btn-lg" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+          Попробовать бесплатно
+          <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#pricing">Смотреть тарифы</a>
       </div>
 
+      <p class="hero-note">Первые 3 дня выдаются автоматически, карта для этого не нужна.</p>
+
+      <div class="facts">
+        <div><div class="val">199 ₽</div><div class="lbl">в месяц</div></div>
+        <div><div class="val">3</div><div class="lbl">устройства в подписке</div></div>
+        <div><div class="val">Без лимитов</div><div class="lbl">трафик и скорость</div></div>
+        <div><div class="val">3 дня</div><div class="lbl">бесплатно на старте</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= возможности ================= -->
+  <section class="section" id="features">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="pill">Возможности</span>
+        <h2>Что входит <span class="accent">в подписку</span></h2>
+        <p>Один тариф — весь сервис. Разница между планами только в сроке доступа.</p>
+      </div>
+
+      <div class="features">
+        <article class="card feature reveal">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/></svg></div>
+          <h3>Маскировка трафика</h3>
+          <p>VLESS Reality и Hysteria2: для сети соединение выглядит как обычный HTTPS. Сервер подбирается автоматически.</p>
+        </article>
+
+        <article class="card feature reveal" style="--d:60ms">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z"/></svg></div>
+          <h3>Трафик без счётчика</h3>
+          <p>Гигабайты не считаются, скорость не режется. Ограничивает только ваш канал и загрузка сервера.</p>
+        </article>
+
+        <article class="card feature reveal" style="--d:120ms">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="2"/><rect x="14" y="9" width="8" height="11" rx="2"/><path d="M6 18h6"/></svg></div>
+          <h3>Три устройства</h3>
+          <p>Телефон, ноутбук и планшет по одной ссылке. Нужно больше — место за 40 ₽, пока активна подписка.</p>
+        </article>
+
+        <article class="card feature reveal">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
+          <h3>Оплата в рублях и крипте</h3>
+          <p>СБП и карты через Platega или USDT через @CryptoBot. Внутри — баланс, промокоды и скидки.</p>
+        </article>
+
+        <article class="card feature reveal" style="--d:60ms">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg></div>
+          <h3>Одна ссылка на всё</h3>
+          <p>Приложение само обновляет список серверов. Новые локации подтягиваются без вашего участия.</p>
+        </article>
+
+        <article class="card feature reveal" style="--d:120ms">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-5.5 6.5-5.5s6.5 1.9 6.5 5.5"/><path d="M17 8h4M19 6v4"/></svg></div>
+          <h3>Бонусы за друзей</h3>
+          <p>Другу 49 ₽ на баланс при первом запуске по вашей ссылке, вам — 15 ₽ за каждого приглашённого.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= подключение ================= -->
+  <section class="section" id="connect">
+    <div class="wrap connect">
       <div class="phone-wrap reveal">
         <div class="phone" id="phone">
           <div class="phone-screen">
             <div class="ph-top">
-              <svg class="brand-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
+              <svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
               <span>Jay Connect</span>
             </div>
 
@@ -133,91 +215,36 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- строка с технической частью: без картинок и обещаний -->
-  <div class="specs">
-    <div class="wrap specs-inner">
-      <span>Протоколы: <b>VLESS Reality, Hysteria2, XHTTP</b></span>
-      <span>Оплата: <b>СБП, USDT</b></span>
-      <span>Клиенты: <b>Happ, v2rayNG, Streisand, Shadowrocket, Hiddify</b></span>
-    </div>
-  </div>
+      <div>
+        <div class="head left reveal" style="margin-bottom:14px">
+          <span class="pill">Подключение</span>
+          <h2>Три шага, дальше <span class="accent">можно забыть</span></h2>
+        </div>
 
-  <!-- ================= возможности ================= -->
-  <section class="section" id="features">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="label">Возможности</span>
-        <h2>Что входит в подписку</h2>
-        <p>Тариф влияет только на срок. Скорость, локации и протоколы одинаковые на всех.</p>
-      </div>
-
-      <div class="features">
-        <article class="feature reveal">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/></svg>
-          <h3>Маскировка трафика</h3>
-          <p>VLESS Reality и Hysteria2: для сети соединение выглядит как обычный HTTPS. Сервер подбирается автоматически, переключать вручную ничего не нужно.</p>
-        </article>
-
-        <article class="feature reveal" style="--d:60ms">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z"/></svg>
-          <h3>Трафик без счётчика</h3>
-          <p>Гигабайты не считаются, скорость не режется. Ограничивает только ваш канал и загрузка сервера.</p>
-        </article>
-
-        <article class="feature reveal" style="--d:120ms">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="2"/><rect x="14" y="9" width="8" height="11" rx="2"/><path d="M6 18h6"/></svg>
-          <h3>Три устройства</h3>
-          <p>Телефон, ноутбук и планшет по одной ссылке. Нужно больше — место за 40 ₽, оно остаётся у вас, пока активна подписка.</p>
-        </article>
-
-        <article class="feature reveal">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
-          <h3>Оплата в рублях и крипте</h3>
-          <p>СБП и карты через Platega или USDT через @CryptoBot. Можно держать баланс внутри и списывать с него.</p>
-        </article>
-
-        <article class="feature reveal" style="--d:60ms">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg>
-          <h3>Одна ссылка на всё</h3>
-          <p>Приложение само обновляет список серверов по подписке. Появились новые локации — они подтянутся без вашего участия.</p>
-        </article>
-
-        <article class="feature reveal" style="--d:120ms">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-5.5 6.5-5.5s6.5 1.9 6.5 5.5"/><path d="M17 8h4M19 6v4"/></svg>
-          <h3>Бонусы за друзей</h3>
-          <p>Друг получает 49 ₽ на баланс при первом запуске по вашей ссылке, вы — 15 ₽ за каждого приглашённого.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= подключение ================= -->
-  <section class="section" id="how">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="label">Подключение</span>
-        <h2>Три шага, дальше можно забыть</h2>
-      </div>
-
-      <div class="steps">
-        <article class="step reveal">
-          <div class="num">01</div>
-          <h3>Запустить бота</h3>
-          <p>При первом запуске бот выдаёт 3 дня доступа и ссылку-подписку тем же сообщением.</p>
-        </article>
-        <article class="step reveal" style="--d:70ms">
-          <div class="num">02</div>
-          <h3>Поставить приложение</h3>
-          <p>Happ для iPhone, Android, Windows и Mac. Ссылка добавляется нажатием прямо из чата.</p>
-        </article>
-        <article class="step reveal" style="--d:140ms">
-          <div class="num">03</div>
-          <h3>Включить</h3>
-          <p>Дальше только продление, когда сами захотите. Бот напомнит за три дня до конца.</p>
-        </article>
+        <div class="steps">
+          <article class="step reveal">
+            <div class="num">01</div>
+            <div>
+              <h3>Запустить бота</h3>
+              <p>При первом запуске бот выдаёт 3 дня доступа и ссылку-подписку тем же сообщением.</p>
+            </div>
+          </article>
+          <article class="step reveal" style="--d:70ms">
+            <div class="num">02</div>
+            <div>
+              <h3>Поставить приложение</h3>
+              <p>Happ для iPhone, Android, Windows и Mac. Ссылка добавляется нажатием прямо из чата.</p>
+            </div>
+          </article>
+          <article class="step reveal" style="--d:140ms">
+            <div class="num">03</div>
+            <div>
+              <h3>Включить</h3>
+              <p>Дальше только продление, когда сами захотите. Бот напомнит за три дня до конца.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -225,60 +252,78 @@
   <!-- ================= тарифы ================= -->
   <section class="section" id="pricing">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="label">Тарифы</span>
-        <h2>Платите за срок, а не за функции</h2>
+      <div class="head reveal">
+        <span class="pill">Тарифы</span>
+        <h2>Платите за срок, <span class="accent">а не за функции</span></h2>
         <p>Подписка не продлевается сама: платёж каждый раз подтверждаете вы.</p>
       </div>
 
       <div class="plans">
-        <article class="plan reveal">
-          <div class="plan-head"><span class="plan-name">1 месяц</span></div>
-          <div class="plan-price"><span class="num">199</span><span class="cur">₽</span></div>
-          <div class="plan-per">30 дней</div>
+        <article class="card plan reveal">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="plan-name">1 месяц</div>
+          <div class="plan-sub">Попробовать без обязательств</div>
+          <div class="plan-price"><span class="num">199 ₽</span><span class="per">/ 30 дней</span></div>
+          <a class="btn btn-ghost with-arr" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+            Оформить
+            <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <div class="plan-lead">Что входит:</div>
           <ul class="plan-list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Безлимитный трафик</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>3 устройства</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Все локации</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Безлимитный трафик и скорость</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>3 устройства одновременно</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Все локации и протоколы</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Поддержка в Telegram</li>
           </ul>
-          <a class="btn btn-ghost" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Оформить</a>
         </article>
 
-        <article class="plan pick reveal" style="--d:70ms">
-          <div class="plan-head"><span class="plan-name">3 месяца</span><span class="plan-mark">выгоднее всего</span></div>
-          <div class="plan-price"><span class="num">349</span><span class="cur">₽</span></div>
-          <div class="plan-per">90 дней, около 116 ₽ в месяц</div>
+        <article class="card plan plan-accent card-accent reveal" style="--d:70ms">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="plan-name">3 месяца</div>
+          <div class="plan-sub">Выгоднее всего за месяц</div>
+          <div class="plan-price"><span class="num">349 ₽</span><span class="per">/ 90 дней</span></div>
+          <a class="btn btn-light" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+            Оформить
+            <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <div class="plan-lead">Всё из месячного тарифа, плюс:</div>
           <ul class="plan-list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Всё из месячного тарифа</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Самая низкая цена за месяц</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Продление одной кнопкой</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Около 116 ₽ в месяц</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Продление одной кнопкой</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Оплата с внутреннего баланса</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Промокоды и реферальные бонусы</li>
           </ul>
-          <a class="btn btn-primary" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Оформить</a>
         </article>
 
-        <article class="plan reveal" style="--d:140ms">
-          <div class="plan-head"><span class="plan-name">12 месяцев</span></div>
-          <div class="plan-price"><span class="num">1499</span><span class="cur">₽</span></div>
-          <div class="plan-per">365 дней, около 125 ₽ в месяц</div>
+        <article class="card plan plan-outline reveal" style="--d:140ms">
+          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+          <div class="plan-name">12 месяцев</div>
+          <div class="plan-sub">Для тех, кто уже определился</div>
+          <div class="plan-price"><span class="num">1499 ₽</span><span class="per">/ 365 дней</span></div>
+          <a class="btn btn-ghost with-arr" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+            Оформить
+            <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <div class="plan-lead">Всё из месячного тарифа, плюс:</div>
           <ul class="plan-list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Всё из месячного тарифа</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Цена зафиксирована на год</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Ни одного напоминания об оплате</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Около 125 ₽ в месяц</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Цена зафиксирована на год</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Ни одного напоминания об оплате</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Приоритет в поддержке</li>
           </ul>
-          <a class="btn btn-ghost" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Оформить</a>
         </article>
       </div>
 
-      <p class="plans-note reveal">Дополнительное устройство сверх трёх — 40 ₽. Промокоды и реферальные бонусы работают со всеми тарифами.</p>
+      <p class="plans-note reveal">Дополнительное устройство сверх трёх — 40 ₽. Оплата в рублях через СБП или в USDT.</p>
     </div>
   </section>
 
   <!-- ================= устройства ================= -->
   <section class="section" id="apps">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="label">Устройства</span>
-        <h2>Где работает</h2>
+      <div class="head reveal">
+        <span class="pill">Устройства</span>
+        <h2>Работает <span class="accent">на всём</span></h2>
       </div>
 
       <div class="apps reveal">
@@ -291,19 +336,19 @@
       </div>
 
       <p class="apps-note reveal">
-        Мы рекомендуем <a href="https://happ.su" target="_blank" rel="noopener">Happ</a>: он показывает
-        остаток подписки прямо в приложении. Подойдёт любой клиент, который умеет читать
-        ссылку-подписку.
+        Рекомендуем <a href="https://happ.su" target="_blank" rel="noopener">Happ</a> — он показывает остаток
+        подписки прямо в приложении. Подойдёт любой клиент, который умеет читать ссылку-подписку:
+        v2rayNG, Streisand, Shadowrocket, Hiddify.
       </p>
     </div>
   </section>
 
   <!-- ================= вопросы ================= -->
-  <section class="section" id="faq">
+  <section class="faq-section" id="faq">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="label">Вопросы</span>
-        <h2>Коротко о главном</h2>
+      <div class="head reveal">
+        <span class="pill">FAQ</span>
+        <h2>Ответы на вопросы,<br /><span class="accent">которые задают чаще всего</span></h2>
       </div>
 
       <div class="faq reveal">
@@ -338,6 +383,11 @@
         </div>
 
         <div class="qa">
+          <button class="qa-q" type="button">Можно ли поделиться подпиской с семьёй?<i></i></button>
+          <div class="qa-a"><div><p>Да, в этом и смысл трёх устройств: ссылку можно добавить на телефоны и компьютеры близких. Если мест не хватает, докупите дополнительные по 40 ₽.</p></div></div>
+        </div>
+
+        <div class="qa">
           <button class="qa-q" type="button">Куда писать, если что-то сломалось?<i></i></button>
           <div class="qa-a"><div><p>В поддержку: <a href="https://t.me/jayconnect_support" target="_blank" rel="noopener">@jayconnect_support</a>. Отвечаем в Telegram, обычно хватает пары сообщений.</p></div></div>
         </div>
@@ -346,64 +396,80 @@
   </section>
 
   <!-- ================= финальный блок ================= -->
-  <section class="section">
-    <div class="wrap">
-      <div class="cta reveal">
-        <h2>Три дня, чтобы проверить</h2>
-        <p>Без карты и регистрации. Не подойдёт — просто не продлевайте, ничего списываться не будет.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Открыть бота</a>
-          <a class="btn btn-ghost btn-lg" href="https://app.jayconnect.net" target="_blank" rel="noopener">Личный кабинет</a>
-        </div>
+  <section class="cta-section">
+    <div class="wrap cta-inner">
+      <span class="pill reveal">Начать</span>
+      <h2 class="reveal">Три дня, чтобы проверить<br />всё самому</h2>
+      <p class="lead reveal">Без карты и регистрации. Не подойдёт — просто не продлевайте, ничего списываться не будет.</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-light btn-lg" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+          Открыть бота
+          <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="https://app.jayconnect.net" target="_blank" rel="noopener">Личный кабинет</a>
       </div>
     </div>
+    <span class="orb" aria-hidden="true"></span>
   </section>
 
 </main>
 
-<!-- Действие в зоне большого пальца: показывается только на телефонах и
-     только после того, как первый экран с той же кнопкой уехал вверх. -->
+<!-- Действие в зоне большого пальца: только на телефонах и только после
+     того, как кнопка первого экрана уехала вверх. -->
 <div class="mobile-bar" id="mobile-bar">
   <span class="txt">3 дня бесплатно</span>
-  <a class="btn btn-primary btn-sm" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Открыть бота</a>
+  <a class="btn btn-light btn-sm" href="https://t.me/jayconnectbot" target="_blank" rel="noopener">
+    Открыть бота
+    <span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a>
 </div>
 
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-about">
-        <a class="brand" href="#top">
-          <svg class="brand-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
-          <span>Jay Connect</span>
-        </a>
-        <p>VPN с управлением в Telegram. Безлимитный трафик, три устройства в подписке, поддержка в чате.</p>
-      </div>
+    <div class="footer-panel">
+      <div class="footer-top">
+        <div class="footer-about">
+          <a class="logo" href="#top">
+            <svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
+            <span class="logo-word">Jay <span>Connect</span></span>
+          </a>
+          <p>VPN с управлением в Telegram. Безлимитный трафик, три устройства в подписке и поддержка, которая отвечает.</p>
+          <div class="socials">
+            <a href="https://t.me/jayconnectbot" target="_blank" rel="noopener" aria-label="Телеграм-бот">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" style="fill:currentColor;stroke:none"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.3 13.1 2.8 11.7c-1-.3-1-1 .2-1.5l17.5-6.7c.8-.3 1.5.2 1.4 1.3z"/></svg>
+            </a>
+            <a href="https://t.me/jayconnect_support" target="_blank" rel="noopener" aria-label="Поддержка">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8 8 0 0 1-8.5 8 9 9 0 0 1-3.4-.6L4 20.5l1.4-4.2A8 8 0 0 1 12.5 3.5a8 8 0 0 1 8.5 8z"/></svg>
+            </a>
+          </div>
+        </div>
 
-      <div class="footer-cols">
         <div class="footer-col">
           <h4>Сайт</h4>
           <a href="#features">Возможности</a>
+          <a href="#connect">Подключение</a>
           <a href="#pricing">Тарифы</a>
-          <a href="#apps">Устройства</a>
           <a href="#faq">Вопросы</a>
         </div>
+
         <div class="footer-col">
           <h4>Сервис</h4>
           <a href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Телеграм-бот</a>
           <a href="https://app.jayconnect.net" target="_blank" rel="noopener">Личный кабинет</a>
           <a href="https://t.me/jayconnect_support" target="_blank" rel="noopener">Поддержка</a>
         </div>
+
         <div class="footer-col">
           <h4>Документы</h4>
           <a href="https://app.jayconnect.net/terms.html" target="_blank" rel="noopener">Условия использования</a>
           <a href="https://app.jayconnect.net/privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      <span>© <span id="year">2026</span> Jay Connect</span>
-      <span>Сервис предназначен для защиты соединения и приватности пользователя.</span>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Jay Connect</span>
+        <span>Сервис предназначен для защиты соединения и приватности пользователя.</span>
+      </div>
     </div>
   </div>
 </footer>
