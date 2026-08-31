@@ -276,7 +276,13 @@ button { font: inherit; color: inherit; }
 
 .hero-inner { position: relative; }
 
-.hero .logo-mark.big { width: 54px; height: 54px; margin: 0 auto 26px; }
+/* Знак на первом экране крупный: clamp тянет его от 76px на телефоне
+   до 112px на широком экране, отдельного правила в медиазапросе не нужно. */
+.hero .logo-mark.big {
+  width: clamp(76px, 8.5vw, 112px);
+  height: clamp(76px, 8.5vw, 112px);
+  margin: 0 auto 30px;
+}
 
 .hero h1 { font-size: clamp(36px, 6.2vw, 60px); letter-spacing: -0.04em; }
 
