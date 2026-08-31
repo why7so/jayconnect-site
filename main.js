@@ -71,6 +71,20 @@
     phoneIO.observe(phone);
   }
 
+  /* ---------- липкая кнопка на телефонах ----------
+     Появляется, когда кнопка первого экрана уже уехала вверх: дублировать
+     её, пока она видна, смысла нет. */
+
+  var bar = document.getElementById("mobile-bar");
+  var heroActions = document.querySelector(".hero-actions");
+
+  function onBar() {
+    var gone = heroActions.getBoundingClientRect().bottom < 0;
+    bar.classList.toggle("show", gone);
+  }
+  onBar();
+  window.addEventListener("scroll", onBar, { passive: true });
+
   /* ---------- вопросы ---------- */
 
   document.querySelectorAll(".qa-q").forEach(function (btn) {
