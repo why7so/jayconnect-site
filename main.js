@@ -53,6 +53,28 @@
     revealables.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- переход по якорю ----------
+     Перед прокруткой к разделу показываем всё, что в нём есть. Иначе блоки
+     догоняют экран уже после того, как прокрутка закончилась, и переход
+     между разделами выглядит рваным. */
+
+  function revealInside(el) {
+    if (!el) return;
+    if (el.classList.contains("reveal")) el.classList.add("in");
+    el.querySelectorAll(".reveal").forEach(function (r) { r.classList.add("in"); });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    var id = a.getAttribute("href").slice(1);
+    if (!id || id === "top") return; // ссылка на самый верх ничего не раскрывает
+    a.addEventListener("click", function () {
+      revealInside(document.getElementById(id));
+    });
+  });
+
+  // прямой заход по ссылке вида /#pricing — раздел уже должен быть виден
+  if (location.hash.length > 1) revealInside(document.getElementById(location.hash.slice(1)));
+
   /* ---------- кольцо подписки в макете приложения ----------
      Заполняется, только когда макет попал на экран: иначе анимация пройдёт
      впустую у тех, кто открыл страницу уже прокрученной. */

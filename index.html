@@ -34,15 +34,6 @@
     <path pathLength="1" d="M273.0 334.1Q273.0 334.1 198.0 334.2Q123.0 334.3 118.0 333.2Q113.0 332.1 108.4 329.1Q103.9 326.0 100.9 322.5Q97.9 319.0 96.1 314.5Q94.4 310.0 168.7 309.9Q243.0 309.7 244.0 310.2Q245.0 310.7 249.0 310.7Q253.0 310.7 257.0 312.3Q261.0 313.9 264.0 316.4Q267.0 318.9 269.6 322.9Q272.1 327.0 272.6 330.5Q273.0 334.1 273.0 334.1Z" />
     <path pathLength="1" d="M195.0 384.1Q195.0 384.1 174.0 384.2Q153.0 384.3 150.0 383.7Q147.0 383.1 142.5 380.6Q138.0 378.1 134.5 374.6Q131.0 371.1 128.9 368.1Q126.9 365.0 126.4 362.5Q125.9 360.0 129.0 359.4Q132.0 358.7 154.5 358.7Q177.0 358.7 185.0 359.8Q193.0 360.9 195.6 362.9Q198.1 365.0 199.7 368.5Q201.3 372.0 201.2 376.5Q201.1 381.0 200.1 382.1Q199.0 383.1 197.0 383.6Q195.0 384.1 195.0 384.1Z" />
   </symbol>
-
-  <!-- косые штрихи в углу карточек -->
-  <symbol id="glyph" viewBox="0 0 156 100">
-    <g fill="currentColor">
-      <path d="M60 0h26L46 100H20z" />
-      <path d="M104 0h26L90 100H64z" />
-      <path d="M148 0h26l-40 100h-26z" />
-    </g>
-  </symbol>
 </svg>
 
 <header class="nav" id="nav">
@@ -56,6 +47,7 @@
       <a href="#features">Возможности</a>
       <a href="#connect">Подключение</a>
       <a href="#pricing">Тарифы</a>
+      <a href="#apps">Устройства</a>
       <a href="#faq">Вопросы</a>
     </nav>
 
@@ -74,6 +66,7 @@
     <a href="#features">Возможности</a>
     <a href="#connect">Подключение</a>
     <a href="#pricing">Тарифы</a>
+    <a href="#apps">Устройства</a>
     <a href="#faq">Вопросы</a>
     <a href="https://t.me/jayconnect_support" target="_blank" rel="noopener">Поддержка</a>
     <a href="https://t.me/jayconnectbot" target="_blank" rel="noopener">Открыть бота</a>
@@ -130,45 +123,33 @@
 
       <div class="features">
         <article class="card feature reveal">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
           <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/></svg></div>
-          <h3>Маскировка трафика</h3>
-          <p>VLESS Reality и Hysteria2: для сети соединение выглядит как обычный HTTPS. Сервер подбирается автоматически.</p>
+          <h3>Приватность</h3>
+          <ul class="ticks">
+            <li>историю посещённых сайтов не собираем</li>
+            <li>трафик маскируется под обычный HTTPS</li>
+            <li>реквизиты карт до нас не доходят</li>
+          </ul>
         </article>
 
-        <article class="card feature reveal" style="--d:60ms">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+        <article class="card feature reveal" style="--d:50ms">
           <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z"/></svg></div>
-          <h3>Трафик без счётчика</h3>
-          <p>Гигабайты не считаются, скорость не режется. Ограничивает только ваш канал и загрузка сервера.</p>
+          <h3>Скорость</h3>
+          <ul class="ticks">
+            <li>трафик без лимита по гигабайтам</li>
+            <li>скорость не режем ни на одном тарифе</li>
+            <li>VLESS Reality и Hysteria2 на выбор клиента</li>
+          </ul>
         </article>
 
-        <article class="card feature reveal" style="--d:120ms">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+        <article class="card feature reveal" style="--d:100ms">
           <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="2"/><rect x="14" y="9" width="8" height="11" rx="2"/><path d="M6 18h6"/></svg></div>
-          <h3>Три устройства</h3>
-          <p>Телефон, ноутбук и планшет по одной ссылке. Нужно больше — место за 40 ₽, пока активна подписка.</p>
-        </article>
-
-        <article class="card feature reveal">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
-          <h3>Оплата в рублях и крипте</h3>
-          <p>СБП и карты через Platega или USDT через @CryptoBot. Внутри — баланс, промокоды и скидки.</p>
-        </article>
-
-        <article class="card feature reveal" style="--d:60ms">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1-1"/></svg></div>
-          <h3>Одна ссылка на всё</h3>
-          <p>Приложение само обновляет список серверов. Новые локации подтягиваются без вашего участия.</p>
-        </article>
-
-        <article class="card feature reveal" style="--d:120ms">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-5.5 6.5-5.5s6.5 1.9 6.5 5.5"/><path d="M17 8h4M19 6v4"/></svg></div>
-          <h3>Бонусы за друзей</h3>
-          <p>Другу 49 ₽ на баланс при первом запуске по вашей ссылке, вам — 15 ₽ за каждого приглашённого.</p>
+          <h3>Удобство</h3>
+          <ul class="ticks">
+            <li>3 устройства по одной ссылке-подписке</li>
+            <li>бот и мини-приложение вместо кабинета с паролями</li>
+            <li>оплата в рублях через СБП или в USDT</li>
+          </ul>
         </article>
       </div>
     </div>
@@ -176,50 +157,51 @@
 
   <!-- ================= подключение ================= -->
   <section class="section" id="connect">
-    <div class="wrap connect">
-      <div class="phone-wrap reveal">
-        <div class="phone" id="phone">
-          <div class="phone-screen">
-            <div class="ph-top">
-              <svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
-              <span>Jay Connect</span>
-            </div>
-
-            <div class="ph-card ph-ring">
-              <div class="ring-wrap">
-                <svg class="ring-svg" viewBox="0 0 120 120" aria-hidden="true">
-                  <circle class="ring-track" cx="60" cy="60" r="50" />
-                  <circle class="ring-bar" cx="60" cy="60" r="50" />
-                </svg>
-                <div class="ring-center">
-                  <div class="ring-num">27</div>
-                  <div class="ring-sub">дней</div>
-                </div>
-              </div>
-              <div class="ph-status">Подписка <b>активна</b></div>
-            </div>
-
-            <div class="ph-row">
-              <div class="ph-card ph-mini"><div class="lbl">Баланс</div><div class="val">340 ₽</div></div>
-              <div class="ph-card ph-mini"><div class="lbl">Устройства</div><div class="val">2 / 3</div></div>
-            </div>
-
-            <div class="ph-btn">Подключить устройство</div>
-
-            <div class="ph-tabs">
-              <i class="on"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg></i>
-              <i><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></i>
-              <i><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></i>
-              <i><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></i>
-            </div>
-          </div>
-        </div>
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="pill">Подключение</span>
+        <h2>Три шага, дальше <span class="accent">можно забыть</span></h2>
+        <p>Ни анкет, ни подтверждений почты, ни ручной установки конфигов.</p>
       </div>
 
-      <div>
-        <div class="head left reveal" style="margin-bottom:14px">
-          <span class="pill">Подключение</span>
-          <h2>Три шага, дальше <span class="accent">можно забыть</span></h2>
+      <div class="connect">
+        <div class="phone-wrap reveal">
+          <div class="phone" id="phone">
+            <div class="phone-screen">
+              <div class="ph-top">
+                <svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><use href="#jay" /></svg>
+                <span>Jay Connect</span>
+              </div>
+
+              <div class="ph-card ph-ring">
+                <div class="ring-wrap">
+                  <svg class="ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="ring-track" cx="60" cy="60" r="50" />
+                    <circle class="ring-bar" cx="60" cy="60" r="50" />
+                  </svg>
+                  <div class="ring-center">
+                    <div class="ring-num">27</div>
+                    <div class="ring-sub">дней</div>
+                  </div>
+                </div>
+                <div class="ph-status">Подписка <b>активна</b></div>
+              </div>
+
+              <div class="ph-row">
+                <div class="ph-card ph-mini"><div class="lbl">Баланс</div><div class="val">340 ₽</div></div>
+                <div class="ph-card ph-mini"><div class="lbl">Устройства</div><div class="val">2 / 3</div></div>
+              </div>
+
+              <div class="ph-btn">Подключить устройство</div>
+
+              <div class="ph-tabs">
+                <i class="on"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg></i>
+                <i><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></i>
+                <i><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></i>
+                <i><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></i>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="steps">
@@ -230,14 +212,14 @@
               <p>При первом запуске бот выдаёт 3 дня доступа и ссылку-подписку тем же сообщением.</p>
             </div>
           </article>
-          <article class="step reveal" style="--d:70ms">
+          <article class="step reveal" style="--d:50ms">
             <div class="num">02</div>
             <div>
               <h3>Поставить приложение</h3>
               <p>Happ для iPhone, Android, Windows и Mac. Ссылка добавляется нажатием прямо из чата.</p>
             </div>
           </article>
-          <article class="step reveal" style="--d:140ms">
+          <article class="step reveal" style="--d:100ms">
             <div class="num">03</div>
             <div>
               <h3>Включить</h3>
@@ -260,7 +242,6 @@
 
       <div class="plans">
         <article class="card plan reveal">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
           <div class="plan-name">1 месяц</div>
           <div class="plan-sub">Попробовать без обязательств</div>
           <div class="plan-price"><span class="num">199 ₽</span><span class="per">/ 30 дней</span></div>
@@ -277,8 +258,7 @@
           </ul>
         </article>
 
-        <article class="card plan plan-accent card-accent reveal" style="--d:70ms">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+        <article class="card plan plan-accent reveal" style="--d:50ms">
           <div class="plan-name">3 месяца</div>
           <div class="plan-sub">Выгоднее всего за месяц</div>
           <div class="plan-price"><span class="num">349 ₽</span><span class="per">/ 90 дней</span></div>
@@ -295,8 +275,7 @@
           </ul>
         </article>
 
-        <article class="card plan plan-outline reveal" style="--d:140ms">
-          <svg class="glyph" viewBox="0 0 156 100" aria-hidden="true"><use href="#glyph" /></svg>
+        <article class="card plan plan-outline reveal" style="--d:100ms">
           <div class="plan-name">12 месяцев</div>
           <div class="plan-sub">Для тех, кто уже определился</div>
           <div class="plan-price"><span class="num">1499 ₽</span><span class="per">/ 365 дней</span></div>
@@ -323,23 +302,26 @@
     <div class="wrap">
       <div class="head reveal">
         <span class="pill">Устройства</span>
-        <h2>Работает <span class="accent">на всём</span></h2>
+        <h2>Для всех ваших <span class="accent">устройств</span></h2>
+        <p>Подписка одна, устройства любые: ссылка добавляется в клиент за одно нажатие.</p>
       </div>
 
-      <div class="apps reveal">
-        <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18.5h2"/></svg>iPhone и iPad</span>
-        <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10h14v7a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-7z"/><path d="M8 10 6.5 6M16 10l1.5-4"/></svg>Android</span>
-        <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5 10.5 5v6.5H3zM12.5 4.7 21 3v8.5h-8.5zM3 13.5h7.5V20L3 18.5zM12.5 13.5H21V21l-8.5-1.6z"/></svg>Windows</span>
-        <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M2 20h20"/></svg>macOS</span>
-        <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2.5 0 3.5 2 3.5 4.5 0 2 2.5 4 3 6.5.5 2.5-1 6-6.5 6s-7-3.5-6.5-6c.5-2.5 3-4.5 3-6.5C8.5 5 9.5 3 12 3z"/></svg>Linux</span>
-        <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="12" rx="2"/><path d="M8 20h8M12 16.5V20"/></svg>Android TV</span>
-      </div>
+      <div class="card devices reveal">
+        <div class="apps">
+          <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18.5h2"/></svg>iPhone и iPad</span>
+          <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10h14v7a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-7z"/><path d="M8 10 6.5 6M16 10l1.5-4"/></svg>Android</span>
+          <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5 10.5 5v6.5H3zM12.5 4.7 21 3v8.5h-8.5zM3 13.5h7.5V20L3 18.5zM12.5 13.5H21V21l-8.5-1.6z"/></svg>Windows</span>
+          <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M2 20h20"/></svg>macOS</span>
+          <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2.5 0 3.5 2 3.5 4.5 0 2 2.5 4 3 6.5.5 2.5-1 6-6.5 6s-7-3.5-6.5-6c.5-2.5 3-4.5 3-6.5C8.5 5 9.5 3 12 3z"/></svg>Linux</span>
+          <span class="app-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="12" rx="2"/><path d="M8 20h8M12 16.5V20"/></svg>Android TV</span>
+        </div>
 
-      <p class="apps-note reveal">
-        Рекомендуем <a href="https://happ.su" target="_blank" rel="noopener">Happ</a> — он показывает остаток
-        подписки прямо в приложении. Подойдёт любой клиент, который умеет читать ссылку-подписку:
-        v2rayNG, Streisand, Shadowrocket, Hiddify.
-      </p>
+        <p class="apps-note">
+          Рекомендуем <a href="https://happ.su" target="_blank" rel="noopener">Happ</a> — он показывает остаток
+          подписки прямо в приложении. Подойдёт любой клиент, который умеет читать ссылку-подписку:
+          v2rayNG, Streisand, Shadowrocket, Hiddify.
+        </p>
+      </div>
     </div>
   </section>
 
