@@ -471,83 +471,62 @@ button { font: inherit; color: inherit; }
 
 .plan > * { position: relative; z-index: 1; }
 
-/* средний тариф приподнят и залит зелёным всегда */
-.plan-accent {
-  margin-top: -22px;
-  padding-top: 34px;
-  padding-bottom: 34px;
-  border-color: rgba(82, 170, 82, 0.5);
-}
-
-.plan-accent::before { opacity: 1; }
-
-.plan-outline { border-color: rgba(82, 170, 82, 0.45); }
-
 .plan-name { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
 .plan-sub { margin-top: 4px; font-size: 14px; color: var(--dim); transition: color 260ms var(--ease); }
-.plan-accent .plan-sub { color: rgba(255, 255, 255, 0.75); }
 
 .plan-price { display: flex; align-items: baseline; gap: 6px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); transition: border-color 260ms var(--ease); }
-.plan-accent .plan-price { border-top-color: rgba(255, 255, 255, 0.18); }
 
 .plan-price .num { font-size: 38px; font-weight: 700; letter-spacing: -0.035em; }
 .plan-price .per { font-size: 14.5px; color: var(--dim); transition: color 260ms var(--ease); }
-.plan-accent .plan-price .per { color: rgba(255, 255, 255, 0.75); }
 
 .plan .btn { margin-top: 20px; width: 100%; justify-content: space-between; }
 
 .plan-lead { margin-top: 22px; font-size: 13.5px; color: var(--mute); transition: color 260ms var(--ease); }
-.plan-accent .plan-lead { color: rgba(255, 255, 255, 0.7); }
 
 .plan-list { margin-top: 12px; display: flex; flex-direction: column; gap: 11px; }
 
 .plan-list li { display: flex; gap: 11px; align-items: flex-start; font-size: 14px; color: var(--dim); transition: color 260ms var(--ease); }
-.plan-accent .plan-list li { color: rgba(255, 255, 255, 0.9); }
 
 .plan-list .icon { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; color: var(--accent); }
-.plan-accent .plan-list .icon { color: var(--accent-hi); }
 
 /* Наведение на тариф. Только там, где курсор действительно есть:
    на тач-экранах :hover залипает после тапа до следующего касания. */
-/* any-hover, а не hover: на ноутбуках с сенсорным экраном основной
-   указатель может отдаваться как «без наведения», и при (hover: hover)
-   весь блок выключался вместе с подсветкой тарифов. any-hover срабатывает,
-   если наводить умеет хотя бы одно устройство ввода, то есть мышь. */
-@media (any-hover: hover) {
-  /* Селекторы намеренно начинаются с .plans: ниже по файлу лежит
-     .reveal.in { transform: none } — та же специфичность (два класса
-     против класса с псевдоклассом), и при равенстве побеждает правило,
-     объявленное позже. Из-за этого карточка по наведению не росла:
-     transform затирался обратно в none. Лишний .plans поднимает вес. */
-  .plans .plan {
-    transition: transform 260ms var(--ease), border-color 260ms var(--ease),
-      box-shadow 260ms var(--ease);
-  }
+/* Медиазапроса здесь намеренно нет. И (hover: hover), и (any-hover: hover)
+   на части машин отдают ложный отрицательный ответ, и тогда подсветка не
+   работает вовсе. Залипание :hover после тапа на сенсорном экране здесь
+   безобидно — карточка не кликабельна, кликается только кнопка внутри.
 
-  /* карточка под курсором становится такой же, как средний тариф:
-     подрастает и заливается зелёным */
-  .plans .plan:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(111, 206, 111, 0.85);
-    box-shadow: 0 24px 50px -22px rgba(82, 170, 82, 0.45);
-    z-index: 2;
-  }
-
-  .plans .plan:hover::before { opacity: 1; }
-
-  /* текст на зелёном должен читаться так же, как в средней карточке */
-  .plans .plan:hover .plan-sub,
-  .plans .plan:hover .plan-price .per,
-  .plans .plan:hover .plan-lead { color: rgba(255, 255, 255, 0.75); }
-
-  .plans .plan:hover .plan-list li { color: rgba(255, 255, 255, 0.9); }
-  .plans .plan:hover .plan-list .icon { color: var(--accent-hi); }
-  .plans .plan:hover .plan-price { border-top-color: rgba(255, 255, 255, 0.18); }
-
-  /* кнопка становится белой, как в среднем тарифе */
-  .plans .plan:hover .btn-ghost { background: #fff; border-color: #fff; color: #101210; }
-  .plans .plan:hover .btn-ghost .arr { background: var(--accent); color: var(--accent-ink); }
+   Селекторы начинаются с .plans: ниже по файлу лежит .reveal.in
+   { transform: none } с той же специфичностью (два класса против класса
+   с псевдоклассом), и при равенстве побеждает объявленное позже — из-за
+   этого карточка не росла. Лишний .plans поднимает вес. */
+.plans .plan {
+  transition: transform 260ms var(--ease), border-color 260ms var(--ease),
+    box-shadow 260ms var(--ease);
 }
+
+/* карточка под курсором подрастает и заливается зелёным */
+.plans .plan:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: rgba(111, 206, 111, 0.85);
+  box-shadow: 0 24px 50px -22px rgba(82, 170, 82, 0.45);
+  z-index: 2;
+}
+
+.plans .plan:hover::before { opacity: 1; }
+
+/* на зелёном фоне приглушённый текст перестал бы читаться */
+.plans .plan:hover .plan-sub,
+.plans .plan:hover .plan-price .per,
+.plans .plan:hover .plan-lead { color: rgba(255, 255, 255, 0.75); }
+
+.plans .plan:hover .plan-list li { color: rgba(255, 255, 255, 0.9); }
+.plans .plan:hover .plan-list .icon { color: var(--accent-hi); }
+.plans .plan:hover .plan-price { border-top-color: rgba(255, 255, 255, 0.18); }
+
+/* кнопка на зелёном становится белой */
+.plans .plan:hover .btn-ghost { background: #fff; border-color: #fff; color: #101210; }
+.plans .plan:hover .btn-ghost .arr { background: var(--accent); color: var(--accent-ink); }
 
 .plans-note { margin-top: 26px; text-align: center; font-size: 14px; color: var(--mute); }
 
@@ -772,7 +751,6 @@ button { font: inherit; color: inherit; }
 @media (max-width: 1000px) {
   .connect { grid-template-columns: 1fr; gap: 40px; }
   .phone-wrap { justify-content: flex-start; }
-  .plan-accent { margin-top: 0; }
 }
 
 @media (max-width: 900px) {
