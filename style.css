@@ -31,6 +31,16 @@
   --light-dim: #5c635c;
   --light-line: #e3e5e0;
 
+  /* Стекло. Размывать имеет смысл только то, под чем есть перепад яркости,
+     поэтому вместе с этим в body::before лежит очень слабая подложка из
+     градиентов — без неё blur не виден вовсе. */
+  --glass: linear-gradient(160deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035) 44%, rgba(255, 255, 255, 0.02));
+  --glass-line: rgba(255, 255, 255, 0.13);
+  --glass-blur: blur(22px) saturate(140%);
+  /* верхняя кромка ловит свет, нижняя чуть темнее — так поверхность читается
+     как физическая пластина, а не как прямоугольник с прозрачностью */
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+
   --r: 16px;
   --r-lg: 22px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -61,6 +71,20 @@ body {
   overflow-x: hidden;
 }
 
+/* Подложка: три очень слабых пятна, которые стекло собирает в переливы.
+   Fixed — чтобы при прокрутке картинка за стеклом менялась. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 38% at 50% -4%, rgba(82, 170, 82, 0.11), transparent 70%),
+    radial-gradient(40% 30% at 88% 42%, rgba(82, 170, 82, 0.06), transparent 70%),
+    radial-gradient(46% 34% at 6% 78%, rgba(74, 132, 104, 0.05), transparent 70%);
+}
+
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3 { margin: 0; font-weight: 700; line-height: 1.12; letter-spacing: -0.03em; }
@@ -89,9 +113,12 @@ button { font: inherit; color: inherit; }
 .pill {
   display: inline-block;
   padding: 6px 16px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: var(--glass-edge);
   font-size: 13px;
   font-weight: 500;
   color: var(--dim);
@@ -141,8 +168,17 @@ button { font: inherit; color: inherit; }
 .btn-solid { background: var(--accent); color: var(--accent-ink); padding: 0 24px; }
 .btn-solid:hover { background: var(--accent-hi); }
 
-.btn-ghost { border-color: var(--line-2); color: var(--text); padding: 0 22px; }
-.btn-ghost:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--dim); }
+.btn-ghost {
+  border-color: var(--glass-line);
+  color: var(--text);
+  padding: 0 22px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: var(--glass-edge);
+}
+
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.24); }
 
 .btn-ghost.with-arr { padding: 0 8px 0 22px; }
 .btn-ghost .arr { background: rgba(255, 255, 255, 0.09); color: var(--text); }
@@ -314,9 +350,12 @@ button { font: inherit; color: inherit; }
 
 .card {
   position: relative;
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-line);
   border-radius: var(--r-lg);
-  background: var(--card);
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge), 0 24px 48px -34px rgba(0, 0, 0, 0.9);
   overflow: hidden;
 }
 
@@ -374,9 +413,12 @@ button { font: inherit; color: inherit; }
   position: relative;
   width: 300px;
   padding: 9px;
-  border: 1px solid var(--line-2);
+  border: 1px solid var(--glass-line);
   border-radius: 36px;
-  background: #131513;
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge), 0 30px 60px -40px rgba(0, 0, 0, 0.95);
 }
 
 .phone-screen { border-radius: 28px; background: var(--bg); padding: 14px 12px 8px; }
@@ -547,9 +589,12 @@ button { font: inherit; color: inherit; }
   align-items: center;
   gap: 10px;
   padding: 11px 18px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: var(--glass-edge);
   font-size: 14.5px;
   color: var(--dim);
 }
@@ -561,9 +606,20 @@ button { font: inherit; color: inherit; }
 
 /* ---------- вопросы: светлый блок ---------- */
 
-.faq-section { background: var(--light); color: var(--light-text); padding: 72px 0; }
+.faq-section {
+  /* лёгкий градиент вместо плоской заливки — иначе белому стеклу нечего
+     размывать и оно выглядит просто белым прямоугольником */
+  background: linear-gradient(180deg, #f7f8f5 0%, #eef0eb 100%);
+  color: var(--light-text);
+  padding: 72px 0;
+}
 
-.faq-section .pill { background: #fff; border-color: var(--light-line); color: var(--light-dim); }
+.faq-section .pill {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(20, 23, 15, 0.1);
+  color: var(--light-dim);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
 .faq-section .head h2 { color: var(--light-text); }
 .faq-section .head h2 .accent { color: #2f7a35; }
 .faq-section .head p { color: var(--light-dim); }
@@ -571,13 +627,16 @@ button { font: inherit; color: inherit; }
 .faq { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
 
 .qa {
-  border: 1px solid var(--light-line);
+  border: 1px solid rgba(20, 23, 15, 0.09);
   border-radius: var(--r);
-  background: var(--light-card);
-  transition: border-color 200ms var(--ease);
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: border-color 200ms var(--ease), background 200ms var(--ease);
 }
 
-.qa.open { border-color: #c9cec7; }
+.qa.open { border-color: rgba(20, 23, 15, 0.16); background: rgba(255, 255, 255, 0.85); }
 
 .qa-q {
   display: flex;
@@ -656,9 +715,12 @@ button { font: inherit; color: inherit; }
 .footer { padding: 0 0 40px; }
 
 .footer-panel {
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-line);
   border-radius: var(--r-lg);
-  background: var(--bg-2);
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge);
   padding: 40px;
 }
 
@@ -775,6 +837,14 @@ button { font: inherit; color: inherit; }
 }
 
 @media (max-width: 600px) {
+  /* Прозрачность оставляем, размытие убираем: два десятка backdrop-filter
+     на экране заметно тормозят прокрутку на недорогих телефонах, а на
+     тёмном фоне разница почти не видна. */
+  .card, .pill, .btn-ghost, .app-tile, .phone, .footer-panel, .qa {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .features { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr 1fr; gap: 22px 16px; }
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
