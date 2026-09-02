@@ -54,7 +54,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  /* база фона — на самом body, а движущиеся пятна лежат отдельными слоями
+     в ::before и ::after поверх неё */
+  background: linear-gradient(180deg, #08150c 0%, var(--bg-deep) 100%) fixed;
   color: var(--text);
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -66,20 +68,46 @@ body {
   overflow-x: hidden;
 }
 
-/* Фон: тёмно-зелёная база и четыре пятна поверх. Fixed — картинка за
-   стеклом меняется при прокрутке, из-за этого пластины «живут». */
-body::before {
+/* Живой фон: два слоя зелёных пятен, которые очень медленно расходятся в
+   разные стороны. Разные длительности (52 и 71 с) и alternate — рисунок
+   не повторяется на глаз и не выглядит зациклённым.
+
+   Двигаем только transform: браузер крутит это на композиторе, без
+   перерисовки, поэтому размытые пластины поверх не начинают тормозить.
+   inset: -25% — запас за краями экрана, чтобы при сдвиге и увеличении
+   не показался край слоя. */
+body::before,
+body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -25%;
   z-index: -1;
   pointer-events: none;
+  will-change: transform;
+}
+
+body::before {
   background:
-    radial-gradient(62% 42% at 50% -8%, rgba(82, 170, 82, 0.30), transparent 72%),
-    radial-gradient(46% 34% at 92% 30%, rgba(60, 150, 105, 0.18), transparent 70%),
-    radial-gradient(50% 36% at 4% 62%, rgba(82, 170, 82, 0.14), transparent 72%),
-    radial-gradient(70% 50% at 50% 108%, rgba(82, 170, 82, 0.20), transparent 70%),
-    linear-gradient(180deg, #08150c 0%, var(--bg-deep) 100%);
+    radial-gradient(38% 30% at 46% 18%, rgba(82, 170, 82, 0.34), transparent 70%),
+    radial-gradient(30% 26% at 86% 58%, rgba(60, 150, 105, 0.22), transparent 70%);
+  animation: drift-a 52s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+body::after {
+  background:
+    radial-gradient(34% 28% at 10% 70%, rgba(82, 170, 82, 0.22), transparent 70%),
+    radial-gradient(46% 34% at 60% 98%, rgba(82, 170, 82, 0.26), transparent 72%);
+  animation: drift-b 71s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(4%, 3.5%, 0) scale(1.14); }
+}
+
+@keyframes drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-5%, -3%, 0) scale(1); }
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -722,6 +750,13 @@ button { font: inherit; color: inherit; }
     #bdf7bd 0%, #79dc79 24%, #3d9448 52%, #1a4526 78%, rgba(10, 26, 14, 0) 100%);
   box-shadow: 0 0 180px 30px rgba(82, 170, 82, 0.35);
   pointer-events: none;
+  /* медленное «дыхание» — сфера не выглядит наклейкой */
+  animation: orb-breath 14s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes orb-breath {
+  from { transform: translateX(-50%) scale(1); }
+  to   { transform: translateX(-50%) scale(1.06); }
 }
 
 /* ---------- подвал ---------- */
@@ -862,6 +897,9 @@ button { font: inherit; color: inherit; }
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
+
+  /* фон замирает: постоянная анимация на телефоне только греет батарею */
+  body::before, body::after, .orb { animation: none; }
 
   .features { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr 1fr; padding: 18px 6px; }
