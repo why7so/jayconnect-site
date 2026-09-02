@@ -54,9 +54,7 @@ html {
 
 body {
   margin: 0;
-  /* база фона — на самом body, а движущиеся пятна лежат отдельными слоями
-     в ::before и ::after поверх неё */
-  background: linear-gradient(180deg, #08150c 0%, var(--bg-deep) 100%) fixed;
+  background: var(--bg);
   color: var(--text);
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -68,55 +66,55 @@ body {
   overflow-x: hidden;
 }
 
-/* Живой фон: два слоя зелёных пятен, которые очень медленно расходятся в
-   разные стороны. Разные длительности (52 и 71 с) и alternate — рисунок
-   не повторяется на глаз и не выглядит зациклённым.
+/* Живой фон: медленное кипение.
 
-   Двигаем только transform: браузер крутит это на композиторе, без
-   перерисовки, поэтому размытые пластины поверх не начинают тормозить.
-   inset: -25% — запас за краями экрана, чтобы при сдвиге и увеличении
-   не показался край слоя. */
-body::before,
-body::after {
-  content: "";
+   Каждое пятно — отдельный слой со своим циклом: всплывает, растёт и
+   гаснет, после чего цикл начинается заново. Длительности у всех разные и
+   не кратны друг другу, а отрицательные задержки разводят пятна по фазе —
+   поэтому в каждый момент часть из них появляется, часть уже тает, и
+   рисунок не повторяется.
+
+   Мягкость даёт сам радиальный градиент, а не filter: blur. Размытие
+   пришлось бы пересчитывать на каждом кадре при изменении масштаба, а
+   градиент рисуется один раз. Анимируем только opacity и transform —
+   их браузер крутит на композиторе, без перерисовки, поэтому полтора
+   десятка стеклянных панелей поверх не начинают тормозить. */
+.bg {
   position: fixed;
-  inset: -25%;
+  inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
-  will-change: transform;
+  /* База лежит здесь, а не на body, намеренно: mix-blend-mode смешивает
+     элемент с подложкой внутри своего контекста наложения. Будь градиент
+     на body, пятна смешивались бы с пустотой и светились бы вполсилы. */
+  background: linear-gradient(180deg, #08150c 0%, var(--bg-deep) 100%);
 }
 
-body::before {
-  background:
-    radial-gradient(38% 30% at 46% 18%, rgba(82, 170, 82, 0.40), transparent 70%),
-    radial-gradient(30% 26% at 86% 58%, rgba(60, 150, 105, 0.26), transparent 70%);
-  animation: drift-a 26s ease-in-out infinite;
+.bg span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  border-radius: 50%;
+  /* --c без альфы, прозрачность отдельно: rgba(var(--c), 0) на четырёх
+     компонентах даёт пять аргументов, и весь градиент отбрасывается */
+  background: radial-gradient(circle at 50% 50%, rgba(var(--c), var(--a)) 0%, rgba(var(--c), 0) 70%);
+  opacity: 0;
+  /* экранное смешение: там, где пятна перекрываются, свет складывается —
+     получается кипение, а не просто наложенные полупрозрачные круги */
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  animation: boil var(--t) ease-in-out var(--d) infinite;
 }
 
-body::after {
-  background:
-    radial-gradient(34% 28% at 10% 70%, rgba(82, 170, 82, 0.26), transparent 70%),
-    radial-gradient(46% 34% at 60% 98%, rgba(82, 170, 82, 0.30), transparent 72%);
-  animation: drift-b 34s ease-in-out infinite;
-}
-
-/* Замкнутый круг вместо качания туда-обратно: первый и последний кадр
-   совпадают, между ними пятна обходят четыре точки. Из-за этого движение
-   читается как плавание, а не как маятник. */
-@keyframes drift-a {
-  0%   { transform: translate3d(-7%, -4%, 0) scale(1.06); }
-  25%  { transform: translate3d(6%, 2%, 0) scale(1.22); }
-  50%  { transform: translate3d(9%, -6%, 0) scale(1.12); }
-  75%  { transform: translate3d(-3%, 6%, 0) scale(1.18); }
-  100% { transform: translate3d(-7%, -4%, 0) scale(1.06); }
-}
-
-@keyframes drift-b {
-  0%   { transform: translate3d(6%, 5%, 0) scale(1.14); }
-  25%  { transform: translate3d(-8%, -3%, 0) scale(1.04); }
-  50%  { transform: translate3d(-4%, 7%, 0) scale(1.2); }
-  75%  { transform: translate3d(7%, -5%, 0) scale(1.1); }
-  100% { transform: translate3d(6%, 5%, 0) scale(1.14); }
+@keyframes boil {
+  0%   { opacity: 0;    transform: translate3d(0, 0, 0) scale(0.5); }
+  22%  { opacity: 1;    transform: translate3d(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3), 0) scale(0.85); }
+  55%  { opacity: 0.85; transform: translate3d(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7), 0) scale(1.15); }
+  100% { opacity: 0;    transform: translate3d(var(--dx), var(--dy), 0) scale(1.45); }
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -887,6 +885,9 @@ button { font: inherit; color: inherit; }
     -webkit-backdrop-filter: none;
   }
 
+  /* на маленьком экране половины пятен всё равно не видно */
+  .bg span:nth-child(n + 6) { display: none; }
+
   .features { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
   .footer-panel { padding: 28px 22px; }
@@ -906,6 +907,9 @@ button { font: inherit; color: inherit; }
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  /* без этого пятна замерли бы на кадре 100%, то есть невидимыми,
+     и фон остался бы плоским */
+  .bg span { animation: none; opacity: 0.55; transform: scale(1.05); }
   .ring-bar { stroke-dashoffset: 68; }
   .draw path { fill-opacity: 1; stroke-opacity: 0; stroke-dashoffset: 0; }
 }

@@ -30,9 +30,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=9" />
+<link rel="stylesheet" href="style.css?v=13" />
 </head>
 <body>
+
+<!-- Фон: пятна с собственным циклом жизни. Каждое всплывает, растёт и
+     гаснет; отрицательные задержки разводят их по фазе, поэтому
+     страница открывается сразу с наполненным фоном, а не с пустым. -->
+<div class="bg" aria-hidden="true">
+  <span style="--x:8%;--y:14%;--s:46vmax;--c:82, 170, 82;--a:0.45;--t:24s;--d:-3s;--dx:6%;--dy:-5%"></span>
+  <span style="--x:62%;--y:6%;--s:38vmax;--c:82, 170, 82;--a:0.39;--t:29s;--d:-12s;--dx:-5%;--dy:6%"></span>
+  <span style="--x:30%;--y:46%;--s:52vmax;--c:60, 165, 110;--a:0.33;--t:33s;--d:-20s;--dx:4%;--dy:7%"></span>
+  <span style="--x:78%;--y:36%;--s:34vmax;--c:121, 220, 121;--a:0.30;--t:26s;--d:-7s;--dx:-7%;--dy:-4%"></span>
+  <span style="--x:4%;--y:66%;--s:44vmax;--c:82, 170, 82;--a:0.35;--t:31s;--d:-17s;--dx:7%;--dy:-6%"></span>
+  <span style="--x:50%;--y:78%;--s:48vmax;--c:82, 170, 82;--a:0.39;--t:28s;--d:-24s;--dx:-4%;--dy:-7%"></span>
+  <span style="--x:88%;--y:76%;--s:36vmax;--c:60, 165, 110;--a:0.30;--t:35s;--d:-9s;--dx:-8%;--dy:5%"></span>
+  <span style="--x:18%;--y:90%;--s:40vmax;--c:82, 170, 82;--a:0.35;--t:30s;--d:-27s;--dx:5%;--dy:-8%"></span>
+  <span style="--x:46%;--y:24%;--s:30vmax;--c:121, 220, 121;--a:0.29;--t:22s;--d:-14s;--dx:3%;--dy:8%"></span>
+</div>
 
 <!-- логотип-сойка описан один раз, дальше подключается через <use> -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
