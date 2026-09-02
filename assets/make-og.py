@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent
 W, H = 1200, 630
-BG = (11, 12, 11)
+BG = (7, 16, 9)          # тот же зелёно-чёрный, что и фон сайта
 WHITE = (241, 243, 238)
 GREEN = (82, 170, 82)
 DIM = (154, 161, 154)
@@ -34,7 +34,7 @@ def glow(img: Image.Image) -> None:
     for y in range(32):
         for x in range(60):
             d = ((x - cx) ** 2 + (y - cy) ** 2) ** 0.5
-            k = max(0.0, 1 - d / r) ** 2 * 0.30
+            k = max(0.0, 1 - d / r) ** 2 * 0.42
             px[x, y] = tuple(int(BG[i] + (GREEN[i] - BG[i]) * k) for i in range(3))
     img.paste(small.resize((W, H // 2), Image.LANCZOS), (0, 0))
 
@@ -44,11 +44,11 @@ def logo_mark(size: int) -> Image.Image:
 
     В jay.png подложка непрозрачная (#0b0c0b), и на свечении она видна
     тёмным квадратом. Логотип одноцветный, поэтому прозрачность
-    восстанавливаем по зелёному каналу: 12 — это фон, 170 — сам знак,
+    восстанавливаем по зелёному каналу: 16 — это фон, 170 — сам знак,
     промежуточные значения дают сглаженные края.
     """
     src = Image.open(ROOT / "jay.png").convert("RGB").resize((size, size), Image.LANCZOS)
-    alpha = src.split()[1].point(lambda v: max(0, min(255, round((v - 14) * 255 / 156))))
+    alpha = src.split()[1].point(lambda v: max(0, min(255, round((v - 18) * 255 / 152))))
     flat = Image.new("RGB", src.size, GREEN)
     return Image.merge("RGBA", (*flat.split(), alpha))
 
