@@ -54,7 +54,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  /* ровная зелёная подложка: сверху чуть светлее, книзу уходит в тёмное —
+     этого перепада хватает, чтобы стеклянные панели читались */
+  background: linear-gradient(180deg, #0b1b10 0%, #071009 46%, var(--bg-deep) 100%) fixed;
   color: var(--text);
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -64,57 +66,6 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
-}
-
-/* Живой фон: медленное кипение.
-
-   Каждое пятно — отдельный слой со своим циклом: всплывает, растёт и
-   гаснет, после чего цикл начинается заново. Длительности у всех разные и
-   не кратны друг другу, а отрицательные задержки разводят пятна по фазе —
-   поэтому в каждый момент часть из них появляется, часть уже тает, и
-   рисунок не повторяется.
-
-   Мягкость даёт сам радиальный градиент, а не filter: blur. Размытие
-   пришлось бы пересчитывать на каждом кадре при изменении масштаба, а
-   градиент рисуется один раз. Анимируем только opacity и transform —
-   их браузер крутит на композиторе, без перерисовки, поэтому полтора
-   десятка стеклянных панелей поверх не начинают тормозить. */
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  /* База лежит здесь, а не на body, намеренно: mix-blend-mode смешивает
-     элемент с подложкой внутри своего контекста наложения. Будь градиент
-     на body, пятна смешивались бы с пустотой и светились бы вполсилы. */
-  background: linear-gradient(180deg, #08150c 0%, var(--bg-deep) 100%);
-}
-
-.bg span {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--s);
-  height: var(--s);
-  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
-  border-radius: 50%;
-  /* --c без альфы, прозрачность отдельно: rgba(var(--c), 0) на четырёх
-     компонентах даёт пять аргументов, и весь градиент отбрасывается */
-  background: radial-gradient(circle at 50% 50%, rgba(var(--c), var(--a)) 0%, rgba(var(--c), 0) 70%);
-  opacity: 0;
-  /* экранное смешение: там, где пятна перекрываются, свет складывается —
-     получается кипение, а не просто наложенные полупрозрачные круги */
-  mix-blend-mode: screen;
-  will-change: transform, opacity;
-  animation: boil var(--t) ease-in-out var(--d) infinite;
-}
-
-@keyframes boil {
-  0%   { opacity: 0;    transform: translate3d(0, 0, 0) scale(0.5); }
-  22%  { opacity: 1;    transform: translate3d(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3), 0) scale(0.85); }
-  55%  { opacity: 0.85; transform: translate3d(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7), 0) scale(1.15); }
-  100% { opacity: 0;    transform: translate3d(var(--dx), var(--dy), 0) scale(1.45); }
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -885,9 +836,6 @@ button { font: inherit; color: inherit; }
     -webkit-backdrop-filter: none;
   }
 
-  /* на маленьком экране половины пятен всё равно не видно */
-  .bg span:nth-child(n + 6) { display: none; }
-
   .features { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
   .footer-panel { padding: 28px 22px; }
@@ -907,9 +855,6 @@ button { font: inherit; color: inherit; }
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
-  /* без этого пятна замерли бы на кадре 100%, то есть невидимыми,
-     и фон остался бы плоским */
-  .bg span { animation: none; opacity: 0.55; transform: scale(1.05); }
   .ring-bar { stroke-dashoffset: 68; }
   .draw path { fill-opacity: 1; stroke-opacity: 0; stroke-dashoffset: 0; }
 }
