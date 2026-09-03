@@ -24,9 +24,9 @@
 
   --accent: #52aa52;
   --accent-hi: #79dc79;
-  /* знак-сойка: между ярким --accent-hi и базовым --accent, чтобы
-     логотип не спорил по яркости с белым заголовком рядом */
-  --accent-mark: #61c261;
+  /* знак-сойка темнее основного акцента: на светящемся зелёном фоне
+     яркий знак спорил по весу с белым заголовком рядом */
+  --accent-mark: #4b9a4f;
   --accent-ink: #06120a;
 
   /* стекло */
@@ -804,13 +804,16 @@ button { font: inherit; color: inherit; }
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw 2.2s var(--ease) forwards, fill 0.8s ease 2.5s forwards;
+  /* Вся отрисовка укладывается в ~1.9 с: контур последней фигуры дорисован
+     к 1.42 с, заливка догорает к 1.92 с. Дольше человек уже ждёт, а не
+     смотрит. */
+  animation: draw 1.1s var(--ease) forwards, fill 0.45s ease 1.15s forwards;
 }
 
-.draw path:nth-child(2) { animation-delay: 0.18s, 2.62s; }
-.draw path:nth-child(3) { animation-delay: 0.36s, 2.74s; }
-.draw path:nth-child(4) { animation-delay: 0.54s, 2.86s; }
-.draw path:nth-child(5) { animation-delay: 0.72s, 2.98s; }
+.draw path:nth-child(2) { animation-delay: 0.08s, 1.23s; }
+.draw path:nth-child(3) { animation-delay: 0.16s, 1.31s; }
+.draw path:nth-child(4) { animation-delay: 0.24s, 1.39s; }
+.draw path:nth-child(5) { animation-delay: 0.32s, 1.47s; }
 
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes fill { to { fill-opacity: 1; stroke-opacity: 0; } }
