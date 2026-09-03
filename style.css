@@ -218,10 +218,13 @@ button { font: inherit; color: inherit; }
 .logo-mark path { fill: currentColor; }
 
 .logo-word {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  /* Space Grotesk — отдельная гарнитура только под логотип: у неё узкие
+     геометрические формы, поэтому надпись не путается с обычным текстом,
+     набранным Manrope */
+  font-family: "Space Grotesk", "Manrope", -apple-system, "Segoe UI", sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   white-space: nowrap;
 }
 
