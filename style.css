@@ -807,6 +807,87 @@ button { font: inherit; color: inherit; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes fill { to { fill-opacity: 1; stroke-opacity: 0; } }
 
+/* ---------- один экран — один раздел (только на десктопе) ----------
+
+   Требование: разделы не должны наползать друг на друга, каждый занимает
+   экран целиком. Поэтому min-height: 100vh и вертикальное центрирование
+   содержимого; если содержимое выше экрана (вопросы на невысоком
+   ноутбуке), секция просто растёт дальше — обрезать её нельзя.
+
+   Привязка прокрутки намеренно proximity, а не mandatory: mandatory
+   перехватывает колесо и не даёт остановиться посреди высокого раздела,
+   это раздражает сильнее, чем помогает. Порог по высоте окна нужен, чтобы
+   на низком окне (сплит-скрин, ноутбук 768px) не начало рвать вёрстку. */
+@media (min-width: 901px) and (min-height: 660px) {
+  html { scroll-snap-type: y proximity; }
+
+  .hero,
+  .section,
+  .cta-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    scroll-snap-align: start;
+  }
+
+  /* .wrap внутри секции становится флекс-элементом и без этого сжался бы
+     по содержимому */
+  .hero > .wrap,
+  .section > .wrap,
+  .cta-section > .wrap { width: 100%; }
+
+  /* первый экран уравновешиваем: сверху под панелью шапки, снизу столько же */
+  .hero { padding: 96px 0; }
+
+  /* Девять вопросов в одну колонку в экран не влезают — раскладываем в две.
+     Именно grid, а не columns: раскрытый ответ должен растягивать свою
+     строку, а не перекидывать соседние вопросы в другую колонку. */
+  .faq {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 10px;
+    max-width: 100%;
+  }
+}
+
+/* Невысокое окно (ноутбуки 1366x768 и подобные): содержимое разделов в
+   экран не помещается и наползает на следующий. Поджимаем самое крупное —
+   знак, отступы заголовков и внутренние поля карточек. Полностью
+   гарантировать «один экран» тут нельзя: резать текст ради этого хуже,
+   чем позволить разделу быть чуть выше окна. */
+@media (min-width: 901px) and (max-height: 850px) {
+  .hero .logo-mark.big {
+    width: clamp(84px, 9vw, 116px);
+    height: clamp(84px, 9vw, 116px);
+    margin-bottom: 18px;
+  }
+
+  .hero h1 { font-size: clamp(34px, 4.4vw, 48px); }
+  .hero-lead { margin-top: 16px; font-size: 16px; }
+  .hero-actions { margin-top: 24px; }
+
+  .head { margin-bottom: 30px; }
+  .head h2 { font-size: clamp(26px, 3.4vw, 34px); }
+  .head p { margin-top: 10px; font-size: 15.5px; }
+  .pill { margin-bottom: 14px; }
+
+  .plan { padding: 20px 20px; }
+  .plan-price { margin-top: 16px; padding-top: 14px; }
+  .plan-price .num { font-size: 32px; }
+  .plan .btn { margin-top: 14px; }
+  .plan-lead { margin-top: 16px; }
+  .plan-list { gap: 8px; }
+  .plans-note { margin-top: 18px; }
+
+  .feature { padding: 20px 20px 22px; }
+  .feature .ico { margin-bottom: 12px; }
+  .ticks { gap: 8px; }
+
+  .step { padding: 16px 20px; }
+  .qa-q { padding: 15px 20px; }
+}
+
 /* ---------- адаптив ---------- */
 
 @media (max-width: 1000px) {
