@@ -670,7 +670,7 @@ button { font: inherit; color: inherit; }
 
 /* ---------- финальный блок ---------- */
 
-.cta-section { position: relative; padding: 78px 0 200px; text-align: center; overflow: hidden; }
+.cta-section { position: relative; padding: 78px 0; text-align: center; }
 
 .cta-panel {
   position: relative;
@@ -687,27 +687,6 @@ button { font: inherit; color: inherit; }
 .cta-section h2 { font-size: clamp(28px, 4.4vw, 44px); }
 .cta-section .lead { margin: 16px auto 0; max-width: 470px; color: var(--dim); }
 .cta-section .hero-actions { margin-top: 30px; }
-
-/* сфера: нижняя половина уезжает за край секции, панель стоит поверх неё */
-.orb {
-  position: absolute;
-  left: 50%;
-  bottom: -330px;
-  width: 620px; height: 620px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(closest-side circle at 50% 26%,
-    #bdf7bd 0%, #79dc79 24%, #3d9448 52%, #1a4526 78%, rgba(10, 26, 14, 0) 100%);
-  box-shadow: 0 0 180px 30px rgba(82, 170, 82, 0.35);
-  pointer-events: none;
-  /* медленное «дыхание» — сфера не выглядит наклейкой */
-  animation: orb-breath 9s ease-in-out infinite alternate;
-}
-
-@keyframes orb-breath {
-  from { transform: translateX(-50%) scale(0.97); }
-  to   { transform: translateX(-50%) scale(1.09); }
-}
 
 /* ---------- подвал ---------- */
 
@@ -842,8 +821,7 @@ button { font: inherit; color: inherit; }
   .features { grid-template-columns: 1fr 1fr; }
   .plans { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
-  .cta-section { padding: 56px 0 170px; }
-  .orb { width: 460px; height: 460px; bottom: -250px; }
+  .cta-section { padding: 56px 0; }
 }
 
 @media (max-width: 600px) {
@@ -867,8 +845,7 @@ button { font: inherit; color: inherit; }
   .phone { width: 100%; max-width: 300px; }
   .qa-a p { padding-right: 22px; }
   .cta-panel { padding: 32px 22px; }
-  .orb { width: 340px; height: 340px; bottom: -190px; }
-  .cta-section { padding: 48px 0 140px; }
+  .cta-section { padding: 48px 0; }
   .nav-inner { padding: 0 8px 0 14px; height: 60px; }
 }
 
