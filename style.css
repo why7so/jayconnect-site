@@ -199,13 +199,13 @@ button { font: inherit; color: inherit; }
   height: 64px;
   width: min(calc(100% - 2 * max(24px, env(safe-area-inset-left))), var(--maxw));
   margin-inline: auto;
-  /* цвет-подложка последним слоем — страховка на случай, когда размытие
-     недоступно; на десктопе её почти не видно из-за blur */
-  background-color: rgba(8, 18, 11, 0.72);
   padding: 0 10px 0 18px;
   border-radius: 22px;
   border: 1px solid var(--glass-line);
-  background: var(--glass);
+  /* цвет последним слоем в самом shorthand: отдельный background-color
+     сокращённое свойство background просто сбросило бы в прозрачный.
+     Подложка нужна там, где размытие недоступно */
+  background: var(--glass), rgba(8, 18, 11, 0.72);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--glass-edge), 0 18px 40px -30px rgba(0, 0, 0, 0.95);
@@ -214,7 +214,7 @@ button { font: inherit; color: inherit; }
 
 /* после прокрутки панель становится плотнее — под ней уже контент */
 .nav.scrolled .nav-inner {
-  background: var(--glass-strong);
+  background: var(--glass-strong), rgba(8, 18, 11, 0.86);
   border-color: var(--glass-line-hi);
 }
 
@@ -840,7 +840,7 @@ button { font: inherit; color: inherit; }
 
   /* шапка и меню размытие сохраняют: это две поверхности, а не полтора
      десятка, и именно они перекрывают контент */
-  .nav-inner { background-color: rgba(8, 18, 11, 0.86); }
+  .nav-inner { background: var(--glass), rgba(8, 18, 11, 0.9); }
 
   .features { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
