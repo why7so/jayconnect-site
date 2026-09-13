@@ -75,23 +75,6 @@
   // прямой заход по ссылке вида /#pricing — раздел уже должен быть виден
   if (location.hash.length > 1) revealInside(document.getElementById(location.hash.slice(1)));
 
-  /* ---------- кольцо подписки в макете приложения ----------
-     Заполняется, только когда макет попал на экран: иначе анимация пройдёт
-     впустую у тех, кто открыл страницу уже прокрученной. */
-
-  var phone = document.getElementById("phone");
-
-  if (reduced || !hasIO) {
-    phone.classList.add("is-live");
-  } else {
-    var phoneIO = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      phone.classList.add("is-live");
-      phoneIO.disconnect();
-    }, { threshold: 0.3 });
-    phoneIO.observe(phone);
-  }
-
   /* ---------- липкая кнопка на телефонах ----------
      Появляется, когда кнопка первого экрана уехала вверх: дублировать её,
      пока она на виду, незачем. */

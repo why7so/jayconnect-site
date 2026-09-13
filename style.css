@@ -1,22 +1,18 @@
 /* ==========================================================================
    Jay Connect — jayconnect.net
 
-   Оформление: тёмно-зелёный фон и полупрозрачные пластины поверх него.
-   Всё, что можно, собрано из «стекла» — панель шапки, карточки, шаги,
-   вопросы, подвал. Чтобы стекло вообще было видно, фон не плоский: под
-   ним лежат крупные мягкие пятна (body::before), которые размытие
-   собирает в переливы. На плоской заливке backdrop-filter не даёт ничего.
-
-   Скругления и плавающая панель сверху — из интерфейса Telegram: сайт
-   должен выглядеть продолжением бота, а не отдельным продуктом.
+   Оформление по макету владельца: почти чёрный фон, сплошная зелёная
+   полоса шапки во всю ширину, первый экран в две колонки — текст слева,
+   телефон с настоящим экраном мини-приложения справа. Карточки, шаги и
+   вопросы — полупрозрачные пластины со светлой кромкой поверх тёмного.
    ========================================================================== */
 
 :root {
   color-scheme: dark;
 
-  /* зелёная база вместо прежней почти чёрной */
-  --bg: #071009;
-  --bg-deep: #040a06;
+  /* почти чёрный с едва заметным зелёным подтоном, как в макете */
+  --bg: #121413;
+  --bg-deep: #0b0d0c;
 
   --text: #eef2ea;
   --dim: #a7b1a7;
@@ -50,16 +46,16 @@
 
 html {
   scroll-behavior: smooth;
-  /* плавающая панель занимает 76px (12 отступ + 64 высота), плюс свои
-     72px отступа у секции — заголовок раздела встаёт в ~36px под панелью */
-  scroll-padding-top: 40px;
+  /* полоса шапки 64px, плюс свои 72px отступа у секции — заголовок раздела
+     встаёт в ~36px под полосой */
+  scroll-padding-top: 28px;
 }
 
 body {
   margin: 0;
-  /* ровная зелёная подложка: сверху чуть светлее, книзу уходит в тёмное —
-     этого перепада хватает, чтобы стеклянные панели читались */
-  background: linear-gradient(180deg, #0b1b10 0%, #071009 46%, var(--bg-deep) 100%) fixed;
+  /* почти плоский: лёгкий перепад сверху вниз, чтобы у пластин была
+     хоть какая-то подложка для размытия */
+  background: linear-gradient(180deg, #171917 0%, var(--bg) 45%, var(--bg-deep) 100%) fixed;
   color: var(--text);
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -183,40 +179,60 @@ button { font: inherit; color: inherit; }
 .btn-sm .arr { width: 26px; height: 26px; }
 .btn-sm.btn-ghost { padding: 0 16px; }
 
-/* ---------- шапка: плавающая панель, как в Telegram ---------- */
+/* ---------- шапка: сплошная зелёная полоса ---------- */
 
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 60;
-  padding: 12px 0;
 }
 
+/* Полоса на всю ширину, а содержимое — по сетке страницы. Центрируем не
+   через max-width самой полосы, а через боковые поля: на широком экране
+   они равны (ширина − 1120) / 2 + 24, на узком — просто 24. */
 .nav-inner {
   display: flex;
   align-items: center;
   gap: 20px;
   height: 64px;
-  width: min(calc(100% - 2 * max(24px, env(safe-area-inset-left))), var(--maxw));
-  margin-inline: auto;
-  padding: 0 10px 0 18px;
-  border-radius: 22px;
-  border: 1px solid var(--glass-line);
-  /* цвет последним слоем в самом shorthand: отдельный background-color
-     сокращённое свойство background просто сбросило бы в прозрачный.
-     Подложка нужна там, где размытие недоступно */
-  background: var(--glass), rgba(8, 18, 11, 0.72);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-edge), 0 18px 40px -30px rgba(0, 0, 0, 0.95);
-  transition: background 260ms var(--ease), border-color 260ms var(--ease);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-left: max(24px, env(safe-area-inset-left), calc((100% - var(--maxw)) / 2 + 24px));
+  padding-right: max(24px, env(safe-area-inset-right), calc((100% - var(--maxw)) / 2 + 24px));
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  transition: box-shadow 260ms var(--ease);
 }
 
-/* после прокрутки панель становится плотнее — под ней уже контент */
+/* после прокрутки под полосой контент — добавляем тень, чтобы она читалась
+   как лежащая сверху */
 .nav.scrolled .nav-inner {
-  background: var(--glass-strong), rgba(8, 18, 11, 0.86);
-  border-color: var(--glass-line-hi);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 14px 34px -22px rgba(0, 0, 0, 0.8);
 }
+
+.nav .logo-word { color: var(--accent-ink); }
+.nav .logo-word span { color: #fff; }
+
+.nav-links a { color: rgba(6, 18, 10, 0.72); }
+.nav-links a:hover { color: var(--accent-ink); }
+
+/* кнопки на зелёном: контурная тёмная и тёмная заливная */
+.nav .btn-ghost {
+  background: rgba(6, 18, 10, 0.1);
+  border-color: rgba(6, 18, 10, 0.3);
+  color: var(--accent-ink);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+.nav .btn-ghost:hover { background: rgba(6, 18, 10, 0.18); border-color: rgba(6, 18, 10, 0.45); }
+
+.nav .btn-light { background: var(--accent-ink); color: #fff; box-shadow: none; }
+.nav .btn-light:hover { background: #10261a; }
+.nav .btn-light .arr { background: #fff; color: var(--accent-ink); }
 
 /* ---------- логотип ---------- */
 
@@ -243,11 +259,8 @@ button { font: inherit; color: inherit; }
 .nav-links a {
   font-size: 14.5px;
   font-weight: 500;
-  color: var(--dim);
   transition: color 160ms var(--ease);
 }
-
-.nav-links a:hover { color: var(--text); }
 
 .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
@@ -257,16 +270,16 @@ button { font: inherit; color: inherit; }
   margin-left: auto;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--glass-line);
+  border: 1px solid rgba(6, 18, 10, 0.3);
   border-radius: 13px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(6, 18, 10, 0.1);
   cursor: pointer;
 }
 
 .nav-burger span {
   display: block;
   width: 15px; height: 1.5px;
-  background: var(--text);
+  background: var(--accent-ink);
   position: relative;
   transition: background 180ms var(--ease);
 }
@@ -277,7 +290,7 @@ button { font: inherit; color: inherit; }
   position: absolute;
   left: 0;
   width: 15px; height: 1.5px;
-  background: var(--text);
+  background: var(--accent-ink);
   transition: transform 220ms var(--ease);
 }
 .nav-burger span::before { top: -5px; }
@@ -292,9 +305,9 @@ button { font: inherit; color: inherit; }
   flex-direction: column;
   max-height: calc(100vh - 110px);
   overflow-y: auto;
-  /* та же ширина и те же поля, что у панели шапки */
   width: min(calc(100% - 2 * max(24px, env(safe-area-inset-left))), var(--maxw));
-  margin: 8px auto 0;
+  margin: 10px auto 0;
+  color: var(--text);
   padding: 6px 20px 16px;
   border-radius: var(--r-lg);
   border: 1px solid var(--glass-line);
@@ -320,28 +333,35 @@ button { font: inherit; color: inherit; }
 
 .hero {
   position: relative;
-  padding: 148px 0 76px;
-  text-align: center;
+  padding: 128px 0 76px;
 }
 
-.hero-inner { position: relative; }
-
-.hero .logo-mark.big {
-  width: clamp(104px, 12.5vw, 172px);
-  height: clamp(104px, 12.5vw, 172px);
-  margin: 0 auto 26px;
+.hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 48px;
+  align-items: center;
 }
 
-.hero h1 { font-size: clamp(36px, 6.2vw, 60px); letter-spacing: -0.04em; }
+.hero-copy { text-align: left; }
+
+.hero .logo-mark.hero-mark {
+  width: 64px;
+  height: 64px;
+  margin: 0 0 22px;
+}
+
+.hero h1 { font-size: clamp(36px, 5.2vw, 60px); letter-spacing: -0.04em; }
 
 .hero-lead {
-  margin: 22px auto 0;
+  margin: 22px 0 0;
   max-width: 520px;
   font-size: 17px;
   color: var(--dim);
 }
 
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 34px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
 
 .hero-note { margin-top: 18px; font-size: 14px; color: var(--mute); }
 
@@ -394,93 +414,55 @@ button { font: inherit; color: inherit; }
   background: var(--accent-hi);
 }
 
-/* ---------- подключение ---------- */
-
-.connect { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 48px; align-items: start; }
+/* ---------- телефон в первом экране ---------- */
 
 .phone-wrap { position: relative; display: flex; justify-content: center; }
 
+/* Рамка iPhone: тёмный корпус, тонкая светлая кромка, чёрная полоска
+   «остров» сверху. Внутри — настоящий скриншот мини-приложения, поэтому
+   никакой имитации интерфейса CSS-ом больше нет. */
 .phone {
   position: relative;
   width: 300px;
-  padding: 9px;
-  border: 1px solid var(--glass-line-hi);
-  border-radius: 40px;
-  background: var(--glass-strong);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-edge), 0 40px 70px -40px rgba(0, 0, 0, 0.95);
+  padding: 10px;
+  border-radius: 48px;
+  background: #1a1c1b;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 0 0 2px #0a0b0a,
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 40px 80px -40px rgba(0, 0, 0, 0.95);
 }
 
-/* экран непрозрачный: сквозь дисплей телефона фон просвечивать не должен */
-.phone-screen { border-radius: 32px; background: rgba(6, 14, 8, 0.92); padding: 14px 12px 8px; }
-
-.ph-top { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
-.ph-top .logo-mark { width: 18px; height: 18px; }
-
-.ph-card {
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  padding: 14px;
-  margin-bottom: 8px;
+.phone-island {
+  position: absolute;
+  top: 22px; left: 50%;
+  width: 90px; height: 26px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+  z-index: 2;
 }
 
-.ph-ring { display: flex; flex-direction: column; align-items: center; padding: 18px 14px 16px; }
-
-.ring-wrap { position: relative; }
-.ring-svg { width: 124px; height: 124px; transform: rotate(-90deg); }
-.ring-track { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 8; }
-
-.ring-bar {
-  fill: none;
-  stroke: var(--accent-hi);
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-dasharray: 314;
-  stroke-dashoffset: 314;
+/* полоска сверху экрана — место под «остров»; цвет как у шторки в Telegram,
+   чтобы переход в скриншот был незаметен */
+.phone-screen {
+  border-radius: 38px;
+  overflow: hidden;
+  background: #0b0c0b;
+  padding-top: 40px;
 }
 
-.is-live .ring-bar { animation: ringFill 1.6s var(--ease) 0.3s forwards; }
-@keyframes ringFill { to { stroke-dashoffset: 68; } }
+.phone-shot { display: block; width: 100%; height: auto; }
 
-.ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.ring-num { font-size: 30px; font-weight: 700; letter-spacing: -0.03em; }
-.ring-sub { font-size: 12px; color: var(--mute); margin-top: -2px; }
+/* ---------- подключение: три шага в ряд ---------- */
 
-.ph-status { margin-top: 12px; font-size: 12.5px; color: var(--dim); }
-.ph-status b { color: var(--accent-hi); }
-
-.ph-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.ph-mini { padding: 12px 13px; }
-.ph-mini .lbl { font-size: 11.5px; color: var(--mute); }
-.ph-mini .val { font-size: 16px; font-weight: 700; margin-top: 2px; }
-
-.ph-btn {
-  margin-top: 8px;
-  height: 42px;
-  border-radius: 14px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 14px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ph-tabs { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
-.ph-tabs i { display: flex; align-items: center; justify-content: center; height: 28px; color: var(--mute); }
-.ph-tabs i.on { color: var(--accent-hi); }
-
-/* шаги — тоже пластины, а не строки с линейками */
-.steps { display: flex; flex-direction: column; gap: 12px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
 .step {
   display: flex;
-  gap: 18px;
-  padding: 22px 24px;
+  gap: 16px;
+  padding: 24px;
   border-radius: var(--r);
   border: 1px solid var(--glass-line);
   background: var(--glass);
@@ -690,7 +672,7 @@ button { font: inherit; color: inherit; }
 
 .cta-section h2 { font-size: clamp(28px, 4.4vw, 44px); }
 .cta-section .lead { margin: 16px auto 0; max-width: 470px; color: var(--dim); }
-.cta-section .hero-actions { margin-top: 30px; }
+.cta-section .hero-actions { margin-top: 30px; justify-content: center; }
 
 /* ---------- подвал ---------- */
 
@@ -836,8 +818,8 @@ button { font: inherit; color: inherit; }
   .section > .wrap,
   .cta-section > .wrap { width: 100%; }
 
-  /* первый экран уравновешиваем: сверху под панелью шапки, снизу столько же */
-  .hero { padding: 96px 0; }
+  /* первый экран уравновешиваем: сверху под полосой шапки, снизу столько же */
+  .hero { padding: 88px 0 72px; }
 
   /* Девять вопросов в одну колонку в экран не влезают — раскладываем в две.
      Именно grid, а не columns: раскрытый ответ должен растягивать свою
@@ -857,11 +839,8 @@ button { font: inherit; color: inherit; }
    гарантировать «один экран» тут нельзя: резать текст ради этого хуже,
    чем позволить разделу быть чуть выше окна. */
 @media (min-width: 901px) and (max-height: 850px) {
-  .hero .logo-mark.big {
-    width: clamp(84px, 9vw, 116px);
-    height: clamp(84px, 9vw, 116px);
-    margin-bottom: 18px;
-  }
+  .hero .logo-mark.hero-mark { width: 52px; height: 52px; margin-bottom: 16px; }
+  .phone { width: 250px; }
 
   .hero h1 { font-size: clamp(34px, 4.4vw, 48px); }
   .hero-lead { margin-top: 16px; font-size: 16px; }
@@ -890,14 +869,12 @@ button { font: inherit; color: inherit; }
 
 /* ---------- адаптив ---------- */
 
-@media (max-width: 1000px) {
-  .connect { grid-template-columns: 1fr; gap: 32px; }
-  .phone-wrap { justify-content: flex-start; }
-}
-
 @media (max-width: 900px) {
   .section { padding: 56px 0; }
-  .hero { padding: 126px 0 60px; }
+  .hero { padding: 104px 0 56px; }
+  /* телефон под текстом, по центру */
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .steps { grid-template-columns: 1fr; }
   .nav-links, .nav-actions { display: none; }
   .nav-burger { display: flex; }
   .nav.open .mobile-menu { display: flex; }
@@ -919,10 +896,6 @@ button { font: inherit; color: inherit; }
     -webkit-backdrop-filter: none;
   }
 
-  /* шапка и меню размытие сохраняют: это две поверхности, а не полтора
-     десятка, и именно они перекрывают контент */
-  .nav-inner { background: var(--glass), rgba(8, 18, 11, 0.9); }
-
   .features { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
   .footer-panel { padding: 28px 22px; }
@@ -931,7 +904,7 @@ button { font: inherit; color: inherit; }
   .qa-a p { padding-right: 22px; }
   .cta-panel { padding: 32px 22px; }
   .cta-section { padding: 48px 0; }
-  .nav-inner { padding: 0 8px 0 14px; height: 60px; }
+  .nav-inner { height: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -941,6 +914,5 @@ button { font: inherit; color: inherit; }
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .ring-bar { stroke-dashoffset: 68; }
   .draw path { fill-opacity: 1; stroke-opacity: 0; stroke-dashoffset: 0; }
 }
