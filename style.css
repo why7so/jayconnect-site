@@ -416,41 +416,58 @@ button { font: inherit; color: inherit; }
 
 /* ---------- телефон в первом экране ---------- */
 
-.phone-wrap { position: relative; display: flex; justify-content: center; }
+/* на десктопе прижат к правому краю своей колонки, на телефоне — по центру */
+.phone-wrap { position: relative; display: flex; justify-content: flex-end; padding-right: 20px; }
 
-/* Рамка iPhone: тёмный корпус, тонкая светлая кромка, чёрная полоска
-   «остров» сверху. Внутри — настоящий скриншот мини-приложения, поэтому
-   никакой имитации интерфейса CSS-ом больше нет. */
+/* Корпус iPhone, три слоя: титановая рамка (сам .phone, градиент металла и
+   блик по верхней кромке), чёрная окантовка экрана (кольцо box-shadow у
+   .phone-screen) и сам экран со скриншотом. Кнопки на гранях — отдельные
+   элементы, чтобы у каждой была своя высота. */
 .phone {
   position: relative;
   width: 300px;
-  padding: 10px;
-  border-radius: 48px;
-  background: #1a1c1b;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 12px;
+  border-radius: 56px;
+  background: linear-gradient(160deg, #3a3d3b 0%, #1f2120 38%, #191b1a 62%, #2c2f2d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow:
-    inset 0 0 0 2px #0a0b0a,
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 40px 80px -40px rgba(0, 0, 0, 0.95);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 50px 90px -40px rgba(0, 0, 0, 0.95);
 }
+
+/* кнопки на гранях: слева переключатель звука и две клавиши громкости,
+   справа — питание; чуть выступают за корпус */
+.phone-side {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(90deg, #4a4d4b, #2a2c2b);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.phone-side.l1 { left: -3px; top: 116px; height: 26px; border-radius: 2px 0 0 2px; }
+.phone-side.l2 { left: -3px; top: 162px; height: 48px; border-radius: 2px 0 0 2px; }
+.phone-side.l3 { left: -3px; top: 220px; height: 48px; border-radius: 2px 0 0 2px; }
+.phone-side.r  { right: -3px; top: 176px; height: 78px; border-radius: 0 2px 2px 0; background: linear-gradient(270deg, #4a4d4b, #2a2c2b); }
 
 .phone-island {
   position: absolute;
-  top: 22px; left: 50%;
-  width: 90px; height: 26px;
+  top: 30px; left: 50%;
+  width: 96px; height: 28px;
   transform: translateX(-50%);
   border-radius: 999px;
   background: #000;
   z-index: 2;
 }
 
-/* полоска сверху экрана — место под «остров»; цвет как у шторки в Telegram,
-   чтобы переход в скриншот был незаметен */
+/* чёрная окантовка вокруг экрана — кольцом тени, чтобы не плодить обёртки;
+   полоска сверху — место под «остров», цвет как у шторки в Telegram */
 .phone-screen {
-  border-radius: 38px;
+  border-radius: 44px;
   overflow: hidden;
   background: #0b0c0b;
-  padding-top: 40px;
+  padding-top: 44px;
+  box-shadow: 0 0 0 7px #050605;
 }
 
 .phone-shot { display: block; width: 100%; height: auto; }
@@ -874,6 +891,7 @@ button { font: inherit; color: inherit; }
   .hero { padding: 104px 0 56px; }
   /* телефон под текстом, по центру */
   .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .phone-wrap { justify-content: center; padding-right: 0; }
   .steps { grid-template-columns: 1fr; }
   .nav-links, .nav-actions { display: none; }
   .nav-burger { display: flex; }
